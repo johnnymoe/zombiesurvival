@@ -181,6 +181,23 @@ timer.Create("CachedRemantlerEntities", 0.5, 0, function()
 	GAMEMODE.CachedRemantlerEntities = remanents
 end)
 
+GM.CachedCraftEntities = {}
+timer.Create("CachedCraftEntities", 0.5, 0, function()
+	if not GAMEMODE then return end
+	GAMEMODE.CachedCraftEntities = {}
+
+	local craft = {}
+	table.Add(craft, ents.FindByClass("prop_craftstation"))
+
+	for _, v in pairs(player.GetAll()) do
+		if v ~= MySelf and v:HasWeapon("weapon_zs_craftstation") then
+			table.insert(craft, v)
+		end
+	end
+
+	GAMEMODE.CachedCraftEntities = craft
+end)
+
 GM.CachedNests = {}
 timer.Create("CachedNests", 0.5, 0, function()
 	if not GAMEMODE then return end

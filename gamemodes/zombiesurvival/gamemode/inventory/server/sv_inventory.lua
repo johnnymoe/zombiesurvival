@@ -50,35 +50,41 @@ function meta:WipePlayerInventory()
 end
 
 net.Receive("zs_trycraft", function(len, pl)
-	local component = net:ReadString()
-	local weapon = net:ReadString()
-
-	pl:TryAssembleItem(component, weapon)
-end)
-
-function meta:TryAssembleItem(component, heldclass)
-	local heldwep, desiassembly = self:GetWeapon(heldclass)
-	local heldwepiitype = GAMEMODE:GetInventoryItemType(heldclass) ~= -1
-
-	if heldwepiitype then
-		if not self:HasInventoryItem(heldclass) then
-			self:CenterNotify(COLOR_RED, "You don't have the item to craft this with.")
-			self:SendLua("surface.PlaySound(\"buttons/button10.wav\")")
-			return
-		end
-	else
-		if not heldwep or not heldwep:IsValid() then
-			self:CenterNotify(COLOR_RED, "You don't have the weapon to craft this with.")
-			self:SendLua("surface.PlaySound(\"buttons/button10.wav\")")
-			return
+	local items = net.ReadTable()
+	pl:TryAssembleItem(items)
+	local nearest = pl:NearestCraftingStationOwnedByOther()
+	if nearest then
+		local owner = nearest.GetObjectOwner and nearest:GetObjectOwner() or nearest:GetOwner()
+		if owner:IsValid() then
+			local commission = items["Reward"]
+			if commission > 0 then
+				owner:AddPoints(commission, nil, nil, true)
+				
+				net.Start("zs_commission")
+					net.WriteEntity(nearest)
+					net.WriteEntity(pl)
+					net.WriteFloat(commission)
+				net.Send(owner)
+			end
 		end
 	end
+end)
 
-	for assembly, reqs in pairs(GAMEMODE.Assemblies) do
-		local reqcomp, reqweapon = reqs[1], reqs[2]
-		if reqcomp == component and reqweapon == heldclass then
-			desiassembly = assembly
-			break
+function meta:TryAssembleItem(components)
+	
+	local heldclass = components["Weapon"]
+	
+	local heldwep, desiassembly = components["Weapon"]
+	
+	for i, reqs in pairs(GAMEMODE.Assemblies) do
+		for item, count in pairs(self.ZSInventory) do
+			for k, l in pairs(reqs["Recipes"]) do
+				if string.find(item, k) and count >= l then
+					if reqs["Weapon"] == heldclass then
+						desiassembly = reqs["Result"]
+					end
+				end				
+			end
 		end
 	end
 
@@ -87,19 +93,25 @@ function meta:TryAssembleItem(component, heldclass)
 		self:SendLua("surface.PlaySound(\"buttons/button10.wav\")")
 		return
 	end
-
+	
 	local invitemresult = GAMEMODE:GetInventoryItemType(desiassembly) ~= -1
 
 	local desitable
 	if invitemresult then
-		if not self:TakeInventoryItem(component) then return end
-
+		for k, l in pairs(components) do
+			self:TakeInventoryItem(l)
+		end	
 		self:AddInventoryItem(desiassembly)
 		self:CenterNotify(COLOR_LIMEGREEN, translate.ClientGet(self, "crafting_successful"), color_white, "   ("..GAMEMODE.ZSInventoryItemData[desiassembly].PrintName..")")
 	else
 		desitable = weapons.Get(desiassembly)
-		if (not desitable.AmmoIfHas and self:HasWeapon(desiassembly)) or not self:TakeInventoryItem(component) then return end
-
+		if (not desitable.AmmoIfHas and self:HasWeapon(desiassembly)) then return end
+		for k, l in pairs(components) do
+			for count = #components - 1, #components do
+				self:TakeInventoryItem(l)
+			end	
+		end	
+		
 		if desitable.AmmoIfHas then
 			self:GiveAmmo(1, desitable.Primary.Ammo)
 		end
@@ -109,16 +121,17 @@ function meta:TryAssembleItem(component, heldclass)
 
 		self:CenterNotify(COLOR_LIMEGREEN, translate.ClientGet(self, "crafting_successful"), color_white, "   ("..desitable.PrintName..")")
 	end
-
-	if heldwepiitype then
-		self:TakeInventoryItem(heldclass)
-	else
-		heldwep:EmptyAll(true)
+	
+	self:TakeInventoryItem(heldclass)
+	if heldwep then
+		self:GetWeapon(heldwep):EmptyAll(true)
 		if heldwep.AmmoIfHas then
 			self:RemoveAmmo(1, heldwep.Primary.Ammo)
 		end
 		self:StripWeapon(heldclass)
 	end
+	
+	
 	self:SendLua("surface.PlaySound(\"buttons/lever"..math.random(5)..".wav\")")
 
 	GAMEMODE.StatTracking:IncreaseElementKV(STATTRACK_TYPE_WEAPON, desiassembly, "Crafts", 1)
