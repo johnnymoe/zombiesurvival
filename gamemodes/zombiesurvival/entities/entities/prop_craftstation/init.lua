@@ -91,7 +91,9 @@ end
 function ENT:Use(activator, caller)
 	local ishuman = activator:Team() == TEAM_HUMAN and activator:Alive()
 
-	activator:SendLua("GAMEMODE:OpenCraftMenu()")
+	if ishuman then
+		activator:SendLua("GAMEMODE:OpenCraftMenu()")
+	end
 end
 
 function ENT:AltUse(activator, tr)

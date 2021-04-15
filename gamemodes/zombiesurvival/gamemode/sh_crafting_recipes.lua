@@ -97,9 +97,10 @@ InsertRecipeTbl(buststick_recipe)
 
 local megamasher_recipe = {
 	["Recipes"] = {
-		["comp_propanecan"] = 2
+		["comp_propanecan"] = 2,
+		["comp_adhesive"] = 1
 	},
-	["Desc"] = "A powerful sledgehammer but heavy to wield\nREQUIRES: 2 Propane Tank, 1 Strong adhesive, 1 Plank",
+	["Desc"] = "A powerful sledgehammer but heavy to wield\nREQUIRES: 2 Propane Tank, 1 Strong adhesive, 1 Sledgehammer",
 	["Icon"] = "zombiesurvival/killicons/weapon_zs_megamasher2",
 	["Weapon"] = "weapon_zs_sledgehammer",
 	["Result"] = "weapon_zs_megamasher",

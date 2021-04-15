@@ -197,7 +197,7 @@ GM:AddStartingItem("resupplybox",		ITEMCAT_DEPLOYABLES,			40,				"weapon_zs_resu
 .Countables = "prop_resupplybox"
 GM:AddStartingItem("remantler",			ITEMCAT_DEPLOYABLES,			40,				"weapon_zs_remantler")
 .Countables = "prop_remantler"
-GM:AddStartingItem("crafttbl",			ITEMCAT_DEPLOYABLES,			30,				"weapon_zs_craftstation")
+GM:AddStartingItem("crafttbl",			ITEMCAT_DEPLOYABLES,			40,				"weapon_zs_craftstation")
 .Countables = "prop_craftstation"
 --item =
 --GM:AddStartingItem("infturret",			ITEMCAT_DEPLOYABLES,			50,				"weapon_zs_gunturret",			nil,							nil,									nil,											function(pl) pl:GiveEmptyWeapon("weapon_zs_gunturret") pl:GiveAmmo(1, "thumper") pl:GiveAmmo(125, "smg1") end)
@@ -446,7 +446,7 @@ GM:AddPointShopItem("frotchet",			ITEMCAT_MELEE,			150,			"weapon_zs_frotchet")
 GM:AddPointShopItem("crphmr",			ITEMCAT_TOOLS,			25,				"weapon_zs_hammer",			nil,							nil,									nil,											function(pl) pl:GiveEmptyWeapon("weapon_zs_hammer") pl:GiveAmmo(5, "GaussEnergy") end)
 GM:AddPointShopItem("wrench",			ITEMCAT_TOOLS,			20,				"weapon_zs_wrench").NoClassicMode = true
 GM:AddPointShopItem("arsenalcrate",		ITEMCAT_DEPLOYABLES,			40,				"weapon_zs_arsenalcrate").Countables = "prop_arsenalcrate"
-GM:AddPointShopItem("craftstation",		ITEMCAT_DEPLOYABLES,			30,				"weapon_zs_craftstation").Countables = "prop_craftstation"
+GM:AddPointShopItem("craftstation",		ITEMCAT_DEPLOYABLES,			40,				"weapon_zs_craftstation").Countables = "prop_craftstation"
 GM:AddPointShopItem("resupplybox",		ITEMCAT_DEPLOYABLES,			40,				"weapon_zs_resupplybox").Countables = "prop_resupplybox"
 GM:AddPointShopItem("remantler",		ITEMCAT_DEPLOYABLES,			40,				"weapon_zs_remantler").Countables = "prop_remantler"
 GM:AddPointShopItem("msgbeacon",		ITEMCAT_DEPLOYABLES,			10,				"weapon_zs_messagebeacon").Countables = "prop_messagebeacon"
