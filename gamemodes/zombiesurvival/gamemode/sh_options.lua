@@ -750,13 +750,13 @@ GM.NoNewHumansWave = 2
 GM.NoSuicideWave = 1
 
 -- How long 'wave 0' should last in seconds. This is the time you should give for new players to join and get ready.
-GM.WaveZeroLength = 150
+GM.WaveZeroLength = 180 --150
 
 -- Time humans have between waves to do stuff without NEW zombies spawning. Any dead zombies will be in spectator (crow) view and any living ones will still be living.
 GM.WaveIntermissionLength = 60
 
 -- Time in seconds between end round and next map.
-GM.EndGameTime = 30 --45
+GM.EndGameTime = 15 --45
 
 -- How many clips of ammo guns from the Worth menu start with. Some guns such as shotguns and sniper rifles have multipliers on this.
 GM.SurvivalClips = 4 --2
