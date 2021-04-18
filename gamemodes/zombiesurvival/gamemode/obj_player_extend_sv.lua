@@ -347,6 +347,21 @@ function meta:NearestCraftingStationOwnedByOther()
 	end
 end
 
+function meta:NearestCookingStoveOwnedByOther()
+	local pos = self:EyePos()
+
+	local cookstoves = {}
+	table.Add(cookstoves, ents.FindByClass("prop_cookstove"))
+
+	for _, ent in pairs(cookstoves) do
+		local nearest = ent:NearestPoint(pos)
+		local owner = ent.GetObjectOwner and ent:GetObjectOwner() or ent:GetOwner()
+		if owner ~= self and owner:IsValidHuman() and pos:DistToSqr(nearest) <= 10000 and (WorldVisible(pos, nearest) or self:TraceLine(100).Entity == ent) then
+			return ent
+		end
+	end
+end
+
 local OldLastHitGroup = meta.LastHitGroup
 function meta:LastHitGroup()
 	return self.m_LastHitGroupUnset and CurTime() <= self.m_LastHitGroupUnset and self.m_LastHitGroup or OldLastHitGroup(self)
@@ -974,6 +989,63 @@ function meta:Resupply(owner, obj)
 				net.WriteFloat(0.15)
 			net.Send(owner)
 		end
+	end
+
+	return true
+end
+
+function meta:Restock(owner, obj)
+	if GAMEMODE:GetWave() <= 0 then return end
+	if ((self.FridgeItems or 0) <= 0) then
+		self:CenterNotify(COLOR_RED, translate.ClientGet(self, "no_food_here"))
+		return
+	end
+	
+	local foodAttempts = #GAMEMODE.Food
+	
+	local foodCheck = false
+	
+	local foodrand = math.random(1, #GAMEMODE.Food)
+	local fooditem = GAMEMODE.Food[foodrand]
+
+	while not foodCheck and foodAttempts > 0 do
+		if not self:HasWeapon(fooditem) then
+			foodCheck = true
+			self:Give(fooditem)
+		else
+			foodrand = math.random(1, #GAMEMODE.Food)
+			fooditem = GAMEMODE.Food[foodrand]
+			foodAttempts = foodAttempts - 1
+		end
+	end
+	
+	if foodAttempts <= 0 then
+		self:CenterNotify(COLOR_RED, translate.ClientGet(self, "too_much_food"))
+		return
+	end
+	
+	self.FridgeItems = self.FridgeItems - 1
+
+	net.Start("zs_fridgeitems")
+		net.WriteInt(self.FridgeItems, 8)
+	net.Send(self)
+	
+	net.Start("zs_foodpickup")
+		net.WriteString(fooditem)
+	net.Send(self)
+
+	if self ~= owner and owner:IsValidHuman() then
+		if obj:GetClass() == "prop_fridgestorage" then
+			owner.FridgeUsedByOthers = owner.FridgeUsedByOthers + 1
+		end
+
+		owner:AddPoints(0.15, nil, nil, true)
+
+		net.Start("zs_commission")
+			net.WriteEntity(obj)
+			net.WriteEntity(self)
+			net.WriteFloat(0.15)
+		net.Send(owner)
 	end
 
 	return true

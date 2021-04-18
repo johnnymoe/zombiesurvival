@@ -1,20 +1,21 @@
 INC_SERVER()
 
-local function RefreshTableOwners(pl)
-	for _, ent in pairs(ents.FindByClass("prop_craftstation")) do
+local function RefreshFridgeOwners(pl)
+	for _, ent in pairs(ents.FindByClass("prop_fridgestorage")) do
 		if ent:IsValid() and ent:GetObjectOwner() == pl then
 			ent:SetObjectOwner(NULL)
 		end
 	end
 end
-hook.Add("PlayerDisconnected", "CraftStation.PlayerDisconnected", RefreshTableOwners)
-hook.Add("OnPlayerChangedTeam", "CraftStation.OnPlayerChangedTeam", RefreshTableOwners)
+hook.Add("PlayerDisconnected", "FridgeStorage.PlayerDisconnected", RefreshFridgeOwners)
+hook.Add("OnPlayerChangedTeam", "FridgeStorage.OnPlayerChangedTeam", RefreshFridgeOwners)
 
 function ENT:Initialize()
-	self:SetModel("models/mosi/fnv/props/workstations/workbench.mdl")
+	self:SetModel("models/props_c17/furniturefridge001a.mdl")
 	self:PhysicsInit(SOLID_VPHYSICS)
 	self:SetUseType(SIMPLE_USE)
-	self:SetCollisionGroup(COLLISION_GROUP_WORLD)
+	self:SetPlaybackRate(1)
+	self:SetCollisionGroup(COLLISION_GROUP_WORLD) -- I decided to make them not collide.
 
 	self:CollisionRulesChanged()
 
@@ -29,25 +30,25 @@ end
 
 function ENT:KeyValue(key, value)
 	key = string.lower(key)
-	if key == "maxstationhealth" then
+	if key == "maxfridgehealth" then
 		value = tonumber(value)
 		if not value then return end
 
 		self:SetMaxObjectHealth(value)
-	elseif key == "stationhealth" then
+	elseif key == "fridgehealth" then
 		value = tonumber(value)
 		if not value then return end
 
-		self:SetObjectHealth(value)
+		local caches = MySelf.FridgeItems
 	end
 end
 
 function ENT:AcceptInput(name, activator, caller, args)
-	if name == "setstationhealth" then
-		self:KeyValue("stationhealth", args)
+	if name == "setfridgehealth" then
+		self:KeyValue("fridgehealth", args)
 		return true
-	elseif name == "setmaxstationhealth" then
-		self:KeyValue("maxstationhealth", args)
+	elseif name == "setmaxfridgehealth" then
+		self:KeyValue("maxfridgehealth", args)
 		return true
 	end
 end
@@ -77,22 +78,14 @@ function ENT:SetObjectHealth(health)
 end
 
 function ENT:OnTakeDamage(dmginfo)
-	self:TakePhysicsDamage(dmginfo)
-
 	if dmginfo:GetDamage() <= 0 then return end
+
+	self:TakePhysicsDamage(dmginfo)
 
 	local attacker = dmginfo:GetAttacker()
 	if not (attacker:IsValid() and attacker:IsPlayer() and attacker:Team() == TEAM_HUMAN) then
-		self:ResetLastBarricadeAttacker(attacker, dmginfo)
 		self:SetObjectHealth(self:GetObjectHealth() - dmginfo:GetDamage())
-	end
-end
-
-function ENT:Use(activator, caller)
-	local ishuman = activator:Team() == TEAM_HUMAN and activator:Alive()
-
-	if ishuman then
-		activator:SendLua("GAMEMODE:OpenCraftMenu()")
+		self:ResetLastBarricadeAttacker(attacker, dmginfo)
 	end
 end
 
@@ -101,8 +94,8 @@ function ENT:AltUse(activator, tr)
 end
 
 function ENT:OnPackedUp(pl)
-	pl:GiveEmptyWeapon("weapon_zs_craftstation")
-	pl:GiveAmmo(1, "CombineHeavyCannon")
+	pl:GiveEmptyWeapon("weapon_zs_fridgestorage")
+	pl:GiveAmmo(1, "fridge")
 
 	pl:PushPackedItem(self:GetClass(), self:GetObjectHealth())
 
@@ -112,5 +105,25 @@ end
 function ENT:Think()
 	if self.Destroyed then
 		self:Remove()
+	elseif self.Close and CurTime() >= self.Close then
+		self.Close = nil
+		self:EmitSound("items/ammocrate_close.wav")
 	end
+end
+
+function ENT:Use(activator, caller)
+	if activator:Team() ~= TEAM_HUMAN or not activator:Alive() or GAMEMODE:GetWave() <= 0 then return end
+
+	if not self:GetObjectOwner():IsValid() then
+		self:SetObjectOwner(activator)
+		self:GetObjectOwner():SendDeployableClaimedMessage(self)
+	end
+
+	local owner = self:GetObjectOwner()
+	local resup = activator:Restock(owner, self)
+
+	if resup and not self.Close then
+		self:EmitSound("items/ammocrate_close.wav")
+	end
+	self.Close = CurTime() + 3
 end

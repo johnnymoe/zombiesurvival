@@ -1,14 +1,14 @@
-SWEP.PrintName = "Craft Station"
-SWEP.Description = "A station for crafting materials and items together\nPress PRIMARY ATTACK to deploy the station\nPress SECONDARY ATTACK and RELOAD to rotate the station"
+SWEP.PrintName = "Cooking Stove"
+SWEP.Description = "A stove used for cooking various types of food\nPress PRIMARY ATTACK to deploy the stove\nPress SECONDARY ATTACK and RELOAD to rotate the stove"
 
 SWEP.ViewModel = "models/weapons/v_pistol.mdl"
-SWEP.WorldModel = Model("models/mosi/fnv/props/workstations/workbench.mdl")
+SWEP.WorldModel = Model("models/props_c17/furniturestove001a.mdl")
 
 SWEP.AmmoIfHas = true
 
 SWEP.Primary.ClipSize = 1
 SWEP.Primary.DefaultClip = 1
-SWEP.Primary.Ammo = "CombineHeavyCannon"
+SWEP.Primary.Ammo = "Hornet"
 SWEP.Primary.Delay = 1
 SWEP.Primary.Automatic = true
 

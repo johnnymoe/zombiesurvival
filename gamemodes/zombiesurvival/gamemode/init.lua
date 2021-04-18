@@ -446,6 +446,7 @@ function GM:AddNetworkStrings()
 	util.AddNetworkString("zs_dohulls")
 	util.AddNetworkString("zs_penalty")
 	util.AddNetworkString("zs_nextresupplyuse")
+	util.AddNetworkString("zs_nextfooduse")
 	util.AddNetworkString("zs_stowagecaches")
 	util.AddNetworkString("zs_lifestats")
 	util.AddNetworkString("zs_lifestatsbd")
@@ -454,6 +455,7 @@ function GM:AddNetworkStrings()
 	util.AddNetworkString("zs_boss_spawned")
 	util.AddNetworkString("zs_boss_slain")
 	util.AddNetworkString("zs_commission")
+	util.AddNetworkString("zs_fridgeitems")
 	util.AddNetworkString("zs_healother")
 	util.AddNetworkString("zs_healby")
 	util.AddNetworkString("zs_buffby")
@@ -470,6 +472,7 @@ function GM:AddNetworkStrings()
 	util.AddNetworkString("zs_armdamage")
 	util.AddNetworkString("zs_extrastartingworth")
 	util.AddNetworkString("zs_ammopickup")
+	util.AddNetworkString("zs_foodpickup")
 	util.AddNetworkString("zs_ammogive")
 	util.AddNetworkString("zs_ammogiven")
 	util.AddNetworkString("zs_deployablelost")
@@ -490,6 +493,7 @@ function GM:AddNetworkStrings()
 
 	util.AddNetworkString("zs_inventoryitem")
 	util.AddNetworkString("zs_trycraft")
+	util.AddNetworkString("zs_trycook")
 	util.AddNetworkString("zs_updatealtselwep")
 	util.AddNetworkString("zs_invitem")
 	util.AddNetworkString("zs_invgiven")
@@ -1159,6 +1163,7 @@ end
 local NextTick = 0
 function GM:Think()
 	local time = CurTime()
+	local foodtime = CurTime()
 	local wave = self:GetWave()
 
 	if not self.RoundEnded then
@@ -1210,7 +1215,7 @@ function GM:Think()
 
 	if NextTick <= time then
 		NextTick = time + 1
-
+		
 		local plpos
 
 		if wave == 0 and not self:GetWaveActive() then
@@ -1307,15 +1312,28 @@ function GM:Think()
 				if self:GetWave() > 0 and time > (pl.NextResupplyUse or 0) then
 					local stockpiling = pl:IsSkillActive(SKILL_STOCKPILE)
 
-					pl.NextResupplyUse = time + self.ResupplyBoxCooldown * (pl.ResupplyDelayMul or 1) * (stockpiling and 2.12 or 1)
+					pl.NextResupplyUse = time + GAMEMODE.ResupplyBoxCooldown * (pl.ResupplyDelayMul or 1) * (stockpiling and 2.12 or 1)
 					pl.StowageCaches = (pl.StowageCaches or 0) + (stockpiling and 2 or 1)
-
 					net.Start("zs_nextresupplyuse")
 						net.WriteFloat(pl.NextResupplyUse)
 					net.Send(pl)
 
 					net.Start("zs_stowagecaches")
 						net.WriteInt(pl.StowageCaches, 8)
+					net.Send(pl)
+				end
+				
+				if self:GetWave() > 0 and time > (pl.NextFoodUse or 0) then
+					pl.NextFoodUse = time + GAMEMODE.FridgeStorageCooldown * (pl.ResupplyDelayMul or 1) * (stockpiling and 2.12 or 1)
+					
+					pl.FridgeItems = (pl.FridgeItems or 0) + (stockpiling and 2 or 1)
+					
+					net.Start("zs_nextfooduse")
+						net.WriteFloat(pl.NextFoodUse)
+					net.Send(pl)
+					
+					net.Start("zs_fridgeitems")
+						net.WriteInt(pl.FridgeItems, 8)
 					net.Send(pl)
 				end
 			end
@@ -2151,6 +2169,7 @@ function GM:PlayerInitialSpawnRound(pl)
 	pl.BrainsEaten = 0
 
 	pl.ResupplyBoxUsedByOthers = 0
+	pl.FridgeUsedByOthers = 0
 
 	pl.WaveJoined = self:GetWave()
 
@@ -3986,9 +4005,14 @@ function GM:PlayerSpawn(pl)
 		end
 
 		pl.StowageCaches = 0
+		pl.FridgeItems = 0
 
 		net.Start("zs_stowagecaches")
 			net.WriteInt(pl.StowageCaches, 8)
+		net.Send(pl)
+		
+		net.Start("zs_fridgeitems")
+			net.WriteInt(pl.FridgeItems, 8)
 		net.Send(pl)
 
 		pl:ResetSpeed()

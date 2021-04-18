@@ -1,14 +1,14 @@
-SWEP.PrintName = "Craft Station"
-SWEP.Description = "A station for crafting materials and items together\nPress PRIMARY ATTACK to deploy the station\nPress SECONDARY ATTACK and RELOAD to rotate the station"
+SWEP.PrintName = "Fridge"
+SWEP.Description = "A fridge used to keep food fresh and safe.\nPress PRIMARY ATTACK to deploy the fridge\nPress SECONDARY ATTACK and RELOAD to rotate the Fridge"
 
 SWEP.ViewModel = "models/weapons/v_pistol.mdl"
-SWEP.WorldModel = Model("models/mosi/fnv/props/workstations/workbench.mdl")
+SWEP.WorldModel = Model("models/props_c17/furniturefridge001a.mdl")
 
 SWEP.AmmoIfHas = true
 
 SWEP.Primary.ClipSize = 1
 SWEP.Primary.DefaultClip = 1
-SWEP.Primary.Ammo = "CombineHeavyCannon"
+SWEP.Primary.Ammo = "fridge"
 SWEP.Primary.Delay = 1
 SWEP.Primary.Automatic = true
 

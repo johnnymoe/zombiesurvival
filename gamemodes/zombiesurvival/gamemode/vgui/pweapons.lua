@@ -119,12 +119,10 @@ function MakepWeapons(silent)
 		end
 	end
 
-	for wep, comps in pairs(GAMEMODE.Assemblies) do
-		if not added[wep] then
-			if weapons.Get(wep) then
-				crafts[#crafts + 1] = wep
-				added[wep] = true
-			end
+	for index, comps in pairs(GAMEMODE.Assemblies) do
+		if weapons.Get(comps["Result"]) then
+			crafts[#crafts + 1] = comps["Result"]
+			added[comps["Result"]] = true
 		end
 	end
 
@@ -205,3 +203,4 @@ function MakepWeapons(silent)
 
 	MakepWeapons(true)
 end
+

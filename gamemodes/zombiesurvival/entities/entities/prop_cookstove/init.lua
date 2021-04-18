@@ -1,17 +1,17 @@
 INC_SERVER()
 
-local function RefreshTableOwners(pl)
-	for _, ent in pairs(ents.FindByClass("prop_craftstation")) do
+local function RefreshCookOwners(pl)
+	for _, ent in pairs(ents.FindByClass("prop_cookstove")) do
 		if ent:IsValid() and ent:GetObjectOwner() == pl then
 			ent:SetObjectOwner(NULL)
 		end
 	end
 end
-hook.Add("PlayerDisconnected", "CraftStation.PlayerDisconnected", RefreshTableOwners)
-hook.Add("OnPlayerChangedTeam", "CraftStation.OnPlayerChangedTeam", RefreshTableOwners)
+hook.Add("PlayerDisconnected", "CookStove.PlayerDisconnected", RefreshCookOwners)
+hook.Add("OnPlayerChangedTeam", "CookStove.OnPlayerChangedTeam", RefreshCookOwners)
 
 function ENT:Initialize()
-	self:SetModel("models/mosi/fnv/props/workstations/workbench.mdl")
+	self:SetModel("models/props_c17/furniturestove001a.mdl")
 	self:PhysicsInit(SOLID_VPHYSICS)
 	self:SetUseType(SIMPLE_USE)
 	self:SetCollisionGroup(COLLISION_GROUP_WORLD)
@@ -29,12 +29,12 @@ end
 
 function ENT:KeyValue(key, value)
 	key = string.lower(key)
-	if key == "maxstationhealth" then
+	if key == "maxcookstovehealth" then
 		value = tonumber(value)
 		if not value then return end
 
 		self:SetMaxObjectHealth(value)
-	elseif key == "stationhealth" then
+	elseif key == "maxcookstovehealth" then
 		value = tonumber(value)
 		if not value then return end
 
@@ -43,11 +43,11 @@ function ENT:KeyValue(key, value)
 end
 
 function ENT:AcceptInput(name, activator, caller, args)
-	if name == "setstationhealth" then
-		self:KeyValue("stationhealth", args)
+	if name == "setcookstovehealth" then
+		self:KeyValue("cookstovehealth", args)
 		return true
-	elseif name == "setmaxstationhealth" then
-		self:KeyValue("maxstationhealth", args)
+	elseif name == "setmaxcookstovehealth" then
+		self:KeyValue("maxcookstovehealth", args)
 		return true
 	end
 end
@@ -92,7 +92,7 @@ function ENT:Use(activator, caller)
 	local ishuman = activator:Team() == TEAM_HUMAN and activator:Alive()
 
 	if ishuman then
-		activator:SendLua("GAMEMODE:OpenCraftMenu()")
+		activator:SendLua("GAMEMODE:OpenStoveMenu()")
 	end
 end
 
@@ -101,8 +101,8 @@ function ENT:AltUse(activator, tr)
 end
 
 function ENT:OnPackedUp(pl)
-	pl:GiveEmptyWeapon("weapon_zs_craftstation")
-	pl:GiveAmmo(1, "CombineHeavyCannon")
+	pl:GiveEmptyWeapon("weapon_zs_cookstove")
+	pl:GiveAmmo(1, "Hornet")
 
 	pl:PushPackedItem(self:GetClass(), self:GetObjectHealth())
 

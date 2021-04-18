@@ -272,6 +272,10 @@ GM.HonorableMentions[HM_WAREHOUSE].GetPlayer = function(self)
 	return GetMostKey("ResupplyBoxUsedByOthers")
 end
 
+GM.HonorableMentions[HM_CHEF].GetPlayer = function(self)
+	return GetMostKey("FridgeUsedByOthers")
+end
+
 GM.HonorableMentions[HM_NESTDESTROYER].GetPlayer = function(self)
 	return GetMostKey("NestsDestroyed")
 end

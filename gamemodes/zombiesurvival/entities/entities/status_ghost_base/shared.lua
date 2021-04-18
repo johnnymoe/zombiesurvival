@@ -34,6 +34,25 @@ function ENT:IsInsideProp()
 	return false
 end
 
+function ENT:NearDeployable()
+	if self.GhostNotBarricadeProp then return false end
+	
+	local deployables = {}
+	table.Add(deployables, ents.FindByClass("prop_arsenalcrate"))
+	table.Add(deployables, ents.FindByClass("prop_resupplybox"))
+	table.Add(deployables, ents.FindByClass("prop_craftstation"))
+	table.Add(deployables, ents.FindByClass("prop_cookstove"))
+	
+	local mycenter = self:WorldSpaceCenter()
+	for _, ent in pairs(deployables) do
+		if ent and ent ~= self and ent:IsValid() and ent:GetPos():Distance(self:GetPos()) <= GAMEMODE.DeployableRange then
+			return true
+		end
+	end
+	
+	return false
+end
+
 -- TODO: Rewrite this so it sets pos before the validation...
 function ENT:RecalculateValidity()
 	local owner = self:GetOwner()
@@ -118,7 +137,7 @@ function ENT:RecalculateValidity()
 	self:SetPos(pos)
 	self:SetAngles(ang)
 
-	if self:GetValidPlacement() and self:IsInsideProp() then
+	if self:GetValidPlacement() and (self:IsInsideProp() or self:NearDeployable()) then
 		self:SetValidPlacement(false)
 	end
 
