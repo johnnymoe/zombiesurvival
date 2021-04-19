@@ -734,9 +734,9 @@ cvars.AddChangeCallback("zs_timelimit", function(cvar, oldvalue, newvalue)
 	end
 end)
 
-GM.DeployableRange = CreateConVar("zs_deployrange", 225, FCVAR_ARCHIVE + FCVAR_NOTIFY, "How far deployables need to be separate from in whole numbers"):GetInt()
+GM.DeployableRange = CreateConVar("zs_deployrange", 1, FCVAR_ARCHIVE + FCVAR_NOTIFY, "How far deployables need to be separate from in whole numbers"):GetInt()
 cvars.AddChangeCallback("zs_deployrange", function(cvar, oldvalue, newvalue)
-	GAMEMODE.DeployableRange = tonumber(newvalue) or 225
+	GAMEMODE.DeployableRange = tonumber(newvalue) or 1
 end)
 
 GM.RoundLimit = CreateConVar("zs_roundlimit", "0", FCVAR_ARCHIVE + FCVAR_NOTIFY, "How many times the game can be played on the same map. -1 means infinite or only use time limit. 0 means once."):GetInt()
