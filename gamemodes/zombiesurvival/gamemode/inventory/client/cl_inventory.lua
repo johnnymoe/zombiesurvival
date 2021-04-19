@@ -66,8 +66,72 @@ function CanCraftWithComponent(craftIndex, curInv)
 	return false
 end
 
+function GetMissingComponents(craftIndex, curInv)
+	local inventory = curInv
+	local curWeapon = LocalPlayer():GetActiveWeapon():GetClass()
+	local missingTbl = {}
+	for k, i in pairs(GAMEMODE.Assemblies[craftIndex]["Recipes"]) do
+	
+		if GAMEMODE.Assemblies[craftIndex]["Weapon"] and not LocalPlayer():HasWeapon(GAMEMODE.Assemblies[craftIndex]["Weapon"]) then 
+			table.insert(missingTbl, string.sub(GAMEMODE.Assemblies[craftIndex]["Weapon"], 11)) 
+		end
+		
+		if table.IsEmpty(inventory) then
+			table.insert(missingTbl, string.sub(k, 6))
+		else
+			for item, count in pairs(inventory) do
+				if string.find(item, k) then break end
+				table.insert(missingTbl, string.sub(k, 6))
+			end
+		end
+	end
+
+	return missingTbl
+end
+
+function CanCraftWithIngredients(cookIndex)
+	local curFoods = LocalPlayer():GetWeapons()
+	local cookTbl = {}
+	cookTbl = table.Copy(GAMEMODE.Cooking[cookIndex]["Recipes"])
+	
+	for count, item in pairs(curFoods) do
+			
+		if GAMEMODE.Cooking[cookIndex]["Weapon"] and 
+		not string.find(GAMEMODE.Cooking[cookIndex]["Weapon"], curWeapon) then return false end
+		
+		for k, i in pairs(GAMEMODE.Cooking[cookIndex]["Recipes"]) do
+			if string.find(item:GetClass(), k)then
+				cookTbl[k] = nil
+				if table.IsEmpty(cookTbl) then return true end
+			end
+		end
+	end
+	
+	return false
+end
+
+function GetMissingIngredients(cookIndex)
+
+	local missingTbl = {}
+	for k, i in pairs(GAMEMODE.Cooking[cookIndex]["Recipes"]) do
+
+		if not LocalPlayer():HasWeapon(k) then
+			table.insert(missingTbl, string.sub(k, 13)) 
+		end
+	end
+
+	return missingTbl
+end
+
+
 function TryCraftWithComponent(me)
 	net.Start("zs_trycraft")
+		net.WriteTable(me)
+	net.SendToServer()
+end
+
+function TryCookWithIngedients(me)
+	net.Start("zs_trycook")
 		net.WriteTable(me)
 	net.SendToServer()
 end
@@ -420,7 +484,7 @@ function GM:OpenCraftMenu()
 	if frame.btnClose and frame.btnClose:IsValid() then frame.btnClose:SetVisible(false) end
 	if frame.btnMinim and frame.btnMinim:IsValid() then frame.btnMinim:SetVisible(false) end
 	if frame.btnMaxim and frame.btnMaxim:IsValid() then frame.btnMaxim:SetVisible(false) end
-	frame.CenterMouse = ArsenalMenuCenterMouse
+	frame.CenterMouse = MenuCenterMouse
 	frame.Think = CraftMenuThink
 	self.CraftInterface = frame
 
@@ -447,7 +511,7 @@ function GM:OpenCraftMenu()
 	
 	local itemLayout = vgui.Create("DIconLayout", invListPanel)
 	itemLayout:SetPos(0, 0)
-	itemLayout:SetSize(450, 450)
+	itemLayout:SetSize(wid, hei)
 	itemLayout:SetSpaceY(5)
 	itemLayout:SetSpaceX(3)
 
@@ -457,7 +521,7 @@ function GM:OpenCraftMenu()
 		local craftBtn = itemLayout:Add("DImageButton")
 		craftBtn:SetImage(v["Icon"])
 		craftBtn:SetSize(78, 64)
-		craftBtn:SetToolTip(v["Desc"])
+		craftBtn:SetToolTip(v["Name"] .. "\n" .. v["Desc"])
 		craftBtn.index = crftIndex
 		
 		craftBtn.Think = function(pnl)
@@ -471,7 +535,10 @@ function GM:OpenCraftMenu()
 		craftBtn.DoClick = function(pnl)
 		
 			if not CanCraftWithComponent(pnl.index, self.ZSInventory) then
-				self:CenterNotify(COLOR_RED, "You are missing 1 or more crafting materials")
+				local missingItems = GetMissingComponents(pnl.index, self.ZSInventory)
+				for k, missed in pairs(missingItems) do
+					self:CenterNotify(COLOR_RED, "You are missing: " .. missed)
+				end
 				surface.PlaySound("buttons/button10.wav")
 				return 
 			end
@@ -492,6 +559,103 @@ function GM:OpenCraftMenu()
 			TryCraftWithComponent(me)
 		end
 	end
+	frame:MakePopup()
+end
+function GM:OpenStoveMenu()
+	if self.CookInterface and self.CookInterface:IsValid() then
+		self.CookInterface:SetVisible(true)
+		return
+	end
+
+	local screenscale = BetterScreenScale()
+	local wid, hei = math.min(ScrW(), 900) * screenscale, math.min(ScrH(), 800) * screenscale
+	local tabhei = 18 * screenscale
+
+	local frame = vgui.Create("DFrame")
+	frame:SetSize(wid, hei)
+	frame:Center()
+	frame:SetDeleteOnClose(false)
+	frame:SetTitle(" ")
+	frame:SetDraggable(false)
+	if frame.btnClose and frame.btnClose:IsValid() then frame.btnClose:SetVisible(false) end
+	if frame.btnMinim and frame.btnMinim:IsValid() then frame.btnMinim:SetVisible(false) end
+	if frame.btnMaxim and frame.btnMaxim:IsValid() then frame.btnMaxim:SetVisible(false) end
+	frame.CenterMouse = MenuCenterMouse
+	frame.Think = CookMenuThink
+	self.CookInterface = frame
+
+	local topspace = vgui.Create("DPanel", frame)
+	topspace:SetWide(wid - 16)
+
+	local title = EasyLabel(topspace, "Cooking Stove", "ZSHUDFontSmall", COLOR_WHITE)
+	title:CenterHorizontal()
+	local subtitle = EasyLabel(topspace, "Give your RAAAAW talent in cooking", "ZSHUDFontTiny", COLOR_WHITE)
+	subtitle:CenterHorizontal()
+	subtitle:MoveBelow(title, 4)
+
+	local _, y = subtitle:GetPos()
+	topspace:SetTall(y + subtitle:GetTall() + 4)
+	topspace:AlignTop(8)
+	topspace:CenterHorizontal()
+	
+	local invListPanel = vgui.Create("DScrollPanel", frame)
+	invListPanel:Dock( FILL )
+	local sbar = invListPanel:GetVBar()
+	sbar.Enabled = true
+	invListPanel:DockMargin(0, topspace:GetTall() + 8, 0, 0)
+	invListPanel:InvalidateParent(true)
+	
+	local itemLayout = vgui.Create("DIconLayout", invListPanel)
+	itemLayout:SetPos(0, 0)
+	itemLayout:SetSize(wid, hei)
+	itemLayout:SetSpaceY(5)
+	itemLayout:SetSpaceX(3)
+	
+	local cookIndex = 0
+	for k, v in pairs(GAMEMODE.Cooking) do
+		cookIndex = cookIndex + 1
+		local cookBtn = itemLayout:Add("DImageButton")
+		cookBtn:SetImage(v["Icon"])
+		cookBtn:SetSize(78, 64)
+		cookBtn:SetToolTip(v["Name"] .. "\n" .. v["Desc"])
+		cookBtn.index = cookIndex
+		
+		cookBtn.Think = function(pnl)
+			if CanCraftWithIngredients(pnl.index, self.ZSInventory) then
+				cookBtn:SetAlpha(255)
+			else
+				cookBtn:SetAlpha(25)
+			end
+		end
+		
+		cookBtn.DoClick = function(pnl)
+		
+			if not CanCraftWithIngredients(pnl.index, self.ZSInventory) then
+				local missingItems = GetMissingIngredients(pnl.index, self.ZSInventory)
+				for k, missed in pairs(missingItems) do
+					self:CenterNotify(COLOR_RED, "You are missing: " .. missed)
+				end
+				surface.PlaySound("buttons/button10.wav")
+				return 
+			end
+
+			local me = {}
+			
+			for p, l in pairs(GAMEMODE.Cooking[pnl.index]["Recipes"]) do
+				table.insert(me, p)
+			end
+			
+			
+			me.Cooked = v["Result"]
+			
+			if v["Reward"] then
+				me.Reward = v["Reward"]
+			end
+			
+			TryCookWithIngedients(me)
+		end
+	end
+	
 	frame:MakePopup()
 end
 

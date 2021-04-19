@@ -101,7 +101,7 @@ GM:AddInventoryItemData("comp_busthead",		"Bust Head",				"A bust head that coul
 GM:AddInventoryItemData("comp_sawblade",		"Saw Blade",				"A sharp saw blade ready to be fitted onto fast moving objects.",								"models/props_junk/sawblade001a.mdl")
 GM:AddInventoryItemData("comp_propanecan",		"Propane Canister",			"A propane canister. With the correct setup, has the potential to ignite things.",				"models/props_junk/propane_tank001a.mdl")
 GM:AddInventoryItemData("comp_electrobattery",	"Electrobattery",			"An electrobattery. Could be used to improve repairing motions.",								"models/items/car_battery01.mdl")
-GM:AddInventoryItemData("comp_plug",			"Electrical Plug Socket",	"A basic plug socket. Where's the cable for it?",														"models/props_lab/tpplugholder_single.mdl")
+GM:AddInventoryItemData("comp_plugsocket",		"Electrical Plug Socket",	"A basic plug socket. Where's the cable for it?",												"models/props_lab/tpplugholder_single.mdl")
 GM:AddInventoryItemData("comp_adhesive",		"Strong Adhesive",			"This stuff is quite sticky, don't get caught in it",											"models/props_junk/metal_paintcan001a.mdl")
 --GM:AddInventoryItemData("comp_hungrytether",	"Hungry Tether",			"A hungry tether from a devourer that comes from a devourer rib.",								"models/gibs/HGIBS_rib.mdl")]]
 GM:AddInventoryItemData("comp_contaecore",		"Contained Energy Core",	"A contained energy core, that has an internal charging mechanism.",							"models/Items/combine_rifle_cartridge01.mdl")

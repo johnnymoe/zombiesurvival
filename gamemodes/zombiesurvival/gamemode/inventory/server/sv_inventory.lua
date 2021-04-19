@@ -107,9 +107,7 @@ function meta:TryAssembleItem(components)
 		desitable = weapons.Get(desiassembly)
 		if (not desitable.AmmoIfHas and self:HasWeapon(desiassembly)) then return end
 		for k, l in pairs(components) do
-			for count = #components - 1, #components do
-				self:TakeInventoryItem(l)
-			end	
+			self:TakeInventoryItem(l)	
 		end	
 		
 		if desitable.AmmoIfHas then
@@ -135,6 +133,74 @@ function meta:TryAssembleItem(components)
 	self:SendLua("surface.PlaySound(\"buttons/lever"..math.random(5)..".wav\")")
 
 	GAMEMODE.StatTracking:IncreaseElementKV(STATTRACK_TYPE_WEAPON, desiassembly, "Crafts", 1)
+end
+
+
+net.Receive("zs_trycook", function(len, pl)
+	local items = net.ReadTable()
+	pl:TryCookItem(items)
+	local nearest = pl:NearestCookingStoveOwnedByOther()
+	if nearest then
+		local owner = nearest.GetObjectOwner and nearest:GetObjectOwner() or nearest:GetOwner()
+		if owner:IsValid() then
+			local commission = items["Reward"]
+			if commission > 0 then
+				owner:AddPoints(commission, nil, nil, true)
+				
+				net.Start("zs_commission")
+					net.WriteEntity(nearest)
+					net.WriteEntity(pl)
+					net.WriteFloat(commission)
+				net.Send(owner)
+			end
+		end
+	end
+end)
+
+function meta:TryCookItem(ingredients)
+	
+	local heldclasses = ingredients
+	
+	local desiassembly = ingredients["Cooked"]
+	
+	
+	if not desiassembly then
+		self:CenterNotify(COLOR_RED, "You can't make anything with this recipe and your current food items.")
+		self:SendLua("surface.PlaySound(\"buttons/button10.wav\")")
+		return
+	end
+	
+	local invitemresult = GAMEMODE:GetInventoryItemType(desiassembly) ~= -1
+
+	local desitable
+	if invitemresult then
+		for k, l in pairs(ingredients) do
+			self:StripWeapon(l)
+		end	
+		self:CenterNotify(COLOR_LIMEGREEN, translate.ClientGet(self, "cooking_successful"), color_white, "   ("..GAMEMODE.ZSInventoryItemData[desiassembly].PrintName..")")
+	else
+		desitable = weapons.Get(desiassembly)
+		if (not desitable.AmmoIfHas and self:HasWeapon(desiassembly)) then return end
+		for k, l in pairs(ingredients) do
+			self:StripWeapon(l)
+		end	
+		self:Give(desiassembly)
+		self:UpdateAltSelectedWeapon()
+
+		self:CenterNotify(COLOR_LIMEGREEN, translate.ClientGet(self, "cooking_successful"), color_white, "   ("..desitable.PrintName..")")
+	end
+	
+	self:TakeInventoryItem(heldclass)
+	if heldwep then
+		self:GetWeapon(heldwep):EmptyAll(true)
+		if heldwep.AmmoIfHas then
+			self:RemoveAmmo(1, heldwep.Primary.Ammo)
+		end
+		self:StripWeapon(heldclass)
+	end
+	
+	
+	self:SendLua("surface.PlaySound(\"ambient/fire/ignite.wav\")")
 end
 
 function meta:DropInventoryItemByType(itype)

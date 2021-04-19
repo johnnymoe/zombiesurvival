@@ -66,6 +66,7 @@ include("vault/shared.lua")
 include("workshopfix.lua")
 
 include("sh_crafting_recipes.lua")
+include("sh_cooking_recipes.lua")
 
 include_library("perf")
 include_library("player_movement")
@@ -167,8 +168,12 @@ function GM:AddCustomAmmo()
 	game.AddAmmoType({name = "foodbanana"})
 	game.AddAmmoType({name = "foodsoda"})
 	game.AddAmmoType({name = "foodmilk"})
+	game.AddAmmoType({name = "foodsmoothie"})
 	game.AddAmmoType({name = "foodtakeout"})
 	game.AddAmmoType({name = "foodwater"})
+	
+	--
+	game.AddAmmoType({name = "fridge"})
 end
 
 GM.Food = {}
@@ -176,7 +181,7 @@ function GM:RegisterFood()
 	self.Food = {}
 
 	for k, v in pairs(weapons.GetList()) do
-		if v.Base == "weapon_zs_basefood" then
+		if v.Base == "weapon_zs_basefood" and not string.find(v.ClassName, "weapon_zs_f_c") then
 			table.insert(self.Food, v.ClassName)
 		end
 	end

@@ -330,10 +330,19 @@ net.Receive("zs_ammopickup", function(length)
 	local amount = net.ReadUInt(16)
 	local ammotype = net.ReadString()
 	local ico = GAMEMODE.AmmoIcons[ammotype] or "weapon_zs_resupplybox"
-
+	
 	ammotype = GAMEMODE.AmmoNames[ammotype] or ammotype
 
 	GAMEMODE:CenterNotify({killicon = ico}, " ", COLOR_GREEN, translate.Format("obtained_x_y_ammo", amount, ammotype))
+end)
+
+net.Receive("zs_foodpickup", function(length)
+	local foodtype = net.ReadString()
+	local ico = "weapon_zs_fridgestorage"
+	
+	foodtype = string.sub(foodtype, 13)
+
+	GAMEMODE:CenterNotify({killicon = ico}, " ", COLOR_GREEN, translate.Format("obtained_x_y_food", foodtype))
 end)
 
 net.Receive("zs_ammogive", function(length)

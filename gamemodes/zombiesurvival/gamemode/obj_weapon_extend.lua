@@ -130,6 +130,7 @@ TranslatedAmmo[18] = "striderminigun"
 TranslatedAmmo[19] = "helicoptergun"
 TranslatedAmmo[20] = "ar2altfire"
 TranslatedAmmo[21] = "slam"
+TranslatedAmmo[22] = "CombineHeavyCannon"
 
 function meta:GetPrimaryAmmoTypeString()
 	if self.Primary and self.Primary.Ammo then return string.lower(self.Primary.Ammo) end

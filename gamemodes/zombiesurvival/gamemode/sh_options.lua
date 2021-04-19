@@ -115,6 +115,7 @@ GM.AmmoCache["battery"]						= 24		-- Used with the Medical Kit.
 GM.AmmoCache["gaussenergy"]					= 2			-- Nails used with the Carpenter's Hammer.
 GM.AmmoCache["combinecannon"]				= 1			-- Not used.
 GM.AmmoCache["airboatgun"]					= 1			-- Arsenal crates.
+GM.AmmoCache["CombineHeavyCannon"]			= 1			-- Craft Stations.
 GM.AmmoCache["striderminigun"]				= 1			-- Message beacons.
 GM.AmmoCache["helicoptergun"]				= 1			-- Resupply boxes.
 GM.AmmoCache["spotlamp"]					= 1
@@ -508,7 +509,7 @@ GM:AddPointShopItem("busthead",			ITEMCAT_TOOLS,			25,				"comp_busthead")
 GM:AddPointShopItem("sawblade",			ITEMCAT_TOOLS,			30,				"comp_sawblade")--.SkillRequirement = SKILL_U_CRAFTINGPACK
 GM:AddPointShopItem("cpuparts",			ITEMCAT_TOOLS,			30,				"comp_cpuparts")--.SkillRequirement = SKILL_U_CRAFTINGPACK
 GM:AddPointShopItem("electrobattery",	ITEMCAT_TOOLS,			40,				"comp_electrobattery")--.SkillRequirement = SKILL_U_CRAFTINGPACK
-GM:AddPointShopItem("plug",				ITEMCAT_TOOLS,			35,				"comp_plug")
+GM:AddPointShopItem("plug",				ITEMCAT_TOOLS,			35,				"comp_plugsocket")
 GM:AddPointShopItem("adhesive",			ITEMCAT_TOOLS,			35,				"comp_adhesive")
 GM:AddPointShopItem("barricadekit",		ITEMCAT_DEPLOYABLES,	85,				"weapon_zs_barricadekit")
 GM:AddPointShopItem("medkit",			ITEMCAT_TOOLS,			30,				"weapon_zs_medicalkit")
@@ -636,6 +637,7 @@ GM.HonorableMentions[HM_USEFULTOOPPOSITE] = {Name = "Most useful to opposite tea
 GM.HonorableMentions[HM_STUPID] = {Name = "Stupid", String = "is what %s is for getting killed %d feet away from a zombie spawn.", Callback = genericcallback, Color = COLOR_RED}
 GM.HonorableMentions[HM_SALESMAN] = {Name = "Salesman", String = "is what %s is for having %d points worth of items taken from their arsenal crate.", Callback = genericcallback, Color = COLOR_CYAN}
 GM.HonorableMentions[HM_WAREHOUSE] = {Name = "Warehouse", String = "describes %s well since they had their resupply boxes used %d times.", Callback = genericcallback, Color = COLOR_CYAN}
+GM.HonorableMentions[HM_CHEF] = {Name = "Chef", String = "shows %s since they had %d food items taken from their fridge.", Callback = genericcallback, Color = COLOR_CYAN}
 GM.HonorableMentions[HM_DEFENCEDMG] = {Name = "Defender", String = "goes to %s for protecting humans from %d damage with defence boosts.", Callback = genericcallback, Color = COLOR_WHITE}
 GM.HonorableMentions[HM_STRENGTHDMG] = {Name = "Alchemist", String = "is what %s is for boosting players with an additional %d damage.", Callback = genericcallback, Color = COLOR_CYAN}
 GM.HonorableMentions[HM_BARRICADEDESTROYER] = {Name = "Barricade Destroyer", String = "goes to %s for doing %d damage to barricades.", Callback = genericcallback, Color = COLOR_LIMEGREEN}
@@ -656,7 +658,9 @@ GM.RestrictedModels = {
 	"models/player/soldier_stripped.mdl",
 	"models/player/zelpa/stalker.mdl",
 	"models/player/fatty/fatty.mdl",
-	"models/player/zombie_lacerator2.mdl"
+	"models/player/zombie_lacerator2.mdl",
+	"models/hlvr/human/corpse/zombie/zombie_common_1_player.mdl",
+	"models/hlvr/human/corpse/corpse_worker_1_player.mdl"
 }
 
 -- If a person has no player model then use one of these (auto-generated).
@@ -730,6 +734,11 @@ cvars.AddChangeCallback("zs_timelimit", function(cvar, oldvalue, newvalue)
 	end
 end)
 
+GM.DeployableRange = CreateConVar("zs_deployrange", 225, FCVAR_ARCHIVE + FCVAR_NOTIFY, "How far deployables need to be separate from in whole numbers"):GetInt()
+cvars.AddChangeCallback("zs_deployrange", function(cvar, oldvalue, newvalue)
+	GAMEMODE.DeployableRange = tonumber(newvalue) or 225
+end)
+
 GM.RoundLimit = CreateConVar("zs_roundlimit", "0", FCVAR_ARCHIVE + FCVAR_NOTIFY, "How many times the game can be played on the same map. -1 means infinite or only use time limit. 0 means once."):GetInt()
 cvars.AddChangeCallback("zs_roundlimit", function(cvar, oldvalue, newvalue)
 	GAMEMODE.RoundLimit = tonumber(newvalue) or 3
@@ -763,6 +772,9 @@ GM.SurvivalClips = 4 --2
 
 -- How long do humans have to wait before being able to get more ammo from a resupply box?
 GM.ResupplyBoxCooldown = 30 --60
+
+-- How long do humans have to wait before being able to get more food items from a fridge?
+GM.FridgeStorageCooldown = 140
 
 -- Put your unoriginal, 5MB Rob Zombie and Metallica music here.
 GM.LastHumanSound = Sound("zombiesurvival/lasthuman.ogg")
