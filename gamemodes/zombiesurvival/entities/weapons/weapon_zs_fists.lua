@@ -16,7 +16,7 @@ SWEP.WalkSpeed = SPEED_NORMAL
 SWEP.MeleeDamage = 16
 SWEP.DamageType = DMG_CLUB
 SWEP.UppercutDamageMultiplier = 3
-SWEP.HitDistance = 40
+SWEP.HitDistance = 48
 SWEP.MeleeKnockBack = 0
 
 SWEP.ViewModelFOV = 52
