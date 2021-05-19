@@ -61,7 +61,7 @@ local function DoFleshThrow(pl, wep)
 
 					local phys = ent:GetPhysicsObject()
 					if phys:IsValid() then
-						phys:SetVelocityInstantaneous(ang:Forward() * 660)
+						phys:SetVelocityInstantaneous(ang:Forward() * 350)
 					end
 				end
 			end
