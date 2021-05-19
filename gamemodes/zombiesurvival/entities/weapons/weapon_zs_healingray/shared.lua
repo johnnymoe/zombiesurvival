@@ -25,7 +25,7 @@ SWEP.Tier = 4
 SWEP.MaxStock = 3
 
 SWEP.HealRange = 300
-SWEP.Heal = 3
+SWEP.Heal = 4
 
 SWEP.WalkSpeed = SPEED_SLOWER
 SWEP.FireAnimSpeed = 0.24
