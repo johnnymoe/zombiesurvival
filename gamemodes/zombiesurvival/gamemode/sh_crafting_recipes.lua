@@ -289,9 +289,9 @@ local ripper_recipe = {
 	["Recipes"] = {
 		["comp_sawblade"] = 1
 	},
-	["Desc"] = "REQUIRES: 1 Sawblade, 1 Zeus",
+	["Desc"] = "REQUIRES: 1 Sawblade, 1 Crossbow",
 	["Icon"] = "zombiesurvival/killicons/weapon_zs_ripper",
-	["Weapon"] = "weapon_zs_zeus",
+	["Weapon"] = "weapon_zs_crossbow",
 	["Result"] = "weapon_zs_ripper",
 	["Reward"] = 5
 }
