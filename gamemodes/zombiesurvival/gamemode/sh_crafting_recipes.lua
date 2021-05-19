@@ -154,18 +154,18 @@ local tithonus_recipe = {
 }
 InsertRecipeTbl(tithonus_recipe)
 
-local fracture_recipe = {
-	["Name"] = "'Fracture' Shotgun",
-	["Recipes"] = {
-		["comp_pumpaction"] = 1
-	},
-	["Desc"] = "REQUIRES: 1 Pump action, 1 Sawed-Off",
-	["Icon"] = "zombiesurvival/killicons/weapon_zs_fracture2",
-	["Weapon"] = "weapon_zs_sawedoff",
-	["Result"] = "weapon_zs_fracture",
-	["Reward"] = 10
-}
-InsertRecipeTbl(fracture_recipe)
+-- local fracture_recipe = {
+	-- ["Name"] = "'Fracture' Shotgun",
+	-- ["Recipes"] = {
+		-- ["comp_pumpaction"] = 1
+	-- },
+	-- ["Desc"] = "REQUIRES: 1 Pump action, 1 Sawed-Off",
+	-- ["Icon"] = "zombiesurvival/killicons/weapon_zs_fracture2",
+	-- ["Weapon"] = "weapon_zs_sawedoff",
+	-- ["Result"] = "weapon_zs_fracture",
+	-- ["Reward"] = 10
+-- }
+-- InsertRecipeTbl(fracture_recipe)
 
 local seditionist_recipe = {
 	["Name"] = "'Seditionist' Handgun",
