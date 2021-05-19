@@ -348,6 +348,19 @@ local proliferator_recipe = {
 	["Reward"] = 5
 }
 InsertRecipeTbl(proliferator_recipe)
+
+local harpoon_f_recipe = {
+	["Name"] = "Fierce Harpoon",
+	["Recipes"] = {
+		["comp_launcher"] = 1
+	},
+	["Desc"] = "REQUIRES: 1 Launcher component, 1 Harpoon",
+	["Icon"] = "zombiesurvival/killicons/weapon_zs_harpoon2.png",
+	["Weapon"] = "weapon_zs_harpoon",
+	["Result"] = "weapon_zs_harpoon_f",
+	["Reward"] = 5
+}
+InsertRecipeTbl(harpoon_f_recipe)
 --[[
 -TODO, get trinkets to be taken away from player and rework crafting
 local electromagnet_recipe = {
