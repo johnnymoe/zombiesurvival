@@ -72,7 +72,7 @@ function ENT:Explode()
 	if owner:IsValidLivingHuman() then
 		local source = self:ProjectileDamageSource()
 		local pos = self:GetPos()
-		local radius = 29
+		local radius = 32
 
 		local function InflictInRadius(func)
 			for _, ent in pairs(util.BlastAlloc(source, owner, pos, radius * (owner.ExpDamageRadiusMul or 1))) do
