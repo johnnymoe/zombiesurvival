@@ -72,7 +72,7 @@ local function DoFleshThrow(owner, self)
 
 			local phys = ent:GetPhysicsObject()
 			if phys:IsValid() then
-				phys:SetVelocityInstantaneous(heading * 400)
+				phys:SetVelocityInstantaneous(heading * 660)
 			end
 		end
 	end

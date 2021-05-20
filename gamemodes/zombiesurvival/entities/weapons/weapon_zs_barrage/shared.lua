@@ -14,9 +14,9 @@ SWEP.CSMuzzleFlashes = false
 SWEP.Primary.ClipSize = 4 --30
 SWEP.Primary.Automatic = true
 SWEP.Primary.Ammo = "impactmine"
-SWEP.Primary.Delay = 0.7 --0.3
+SWEP.Primary.Delay = 0.96 --0.3
 SWEP.Primary.DefaultClip = 4
-SWEP.Primary.Damage = 31
+SWEP.Primary.Damage = 32
 SWEP.Primary.NumShots = 3
 
 SWEP.ConeMax = 8
@@ -27,7 +27,7 @@ SWEP.WalkSpeed = SPEED_SLOW
 SWEP.Tier = 4
 SWEP.MaxStock = 3
 
-GAMEMODE:AttachWeaponModifier(SWEP, WEAPON_MODIFIER_FIRE_DELAY, -0.05)
+--GAMEMODE:AttachWeaponModifier(SWEP, WEAPON_MODIFIER_FIRE_DELAY, -0.05)
 
 function SWEP:EmitFireSound()
 	self:EmitSound("weapons/grenade_launcher1.wav", 70, math.random(118, 124), 0.3)

@@ -24,7 +24,7 @@ SWEP.MeleeDamage = 15
 SWEP.MeleeRange = 50
 SWEP.MeleeSize = 0.875
 
-SWEP.MaxStock = 5
+--SWEP.MaxStock = 5
 
 SWEP.UseMelee1 = true
 
@@ -33,7 +33,7 @@ SWEP.NoPropThrowing = true
 SWEP.HitGesture = ACT_HL2MP_GESTURE_RANGE_ATTACK_MELEE
 SWEP.MissGesture = SWEP.HitGesture
 
-SWEP.HealStrength = 1
+SWEP.HealStrength = 1.6
 
 SWEP.NoHolsterOnCarry = true
 
