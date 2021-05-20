@@ -200,6 +200,10 @@ GM:AddStartingItem("remantler",			ITEMCAT_DEPLOYABLES,			20,				"weapon_zs_reman
 .Countables = "prop_remantler"
 GM:AddStartingItem("crafttbl",			ITEMCAT_DEPLOYABLES,			20,				"weapon_zs_craftstation")
 .Countables = "prop_craftstation"
+GM:AddStartingItem("cookingstove",		ITEMCAT_DEPLOYABLES,			20,				"weapon_zs_cookstove")
+.Countables = "prop_cookstove"
+GM:AddStartingItem("fridgestorage",	ITEMCAT_DEPLOYABLES,			40,				"weapon_zs_fridgestorage")
+.Countables = "prop_fridgestorage"
 --item =
 --GM:AddStartingItem("infturret",			ITEMCAT_DEPLOYABLES,			50,				"weapon_zs_gunturret",			nil,							nil,									nil,											function(pl) pl:GiveEmptyWeapon("weapon_zs_gunturret") pl:GiveAmmo(1, "thumper") pl:GiveAmmo(125, "smg1") end)
 --item.Countables = "prop_gunturret"
@@ -451,6 +455,8 @@ GM:AddPointShopItem("arsenalcrate",		ITEMCAT_DEPLOYABLES,			40,				"weapon_zs_ar
 GM:AddPointShopItem("craftstation",		ITEMCAT_DEPLOYABLES,			20,				"weapon_zs_craftstation").Countables = "prop_craftstation"
 GM:AddPointShopItem("resupplybox",		ITEMCAT_DEPLOYABLES,			40,				"weapon_zs_resupplybox").Countables = "prop_resupplybox"
 GM:AddPointShopItem("remantler",		ITEMCAT_DEPLOYABLES,			20,				"weapon_zs_remantler").Countables = "prop_remantler"
+GM:AddPointShopItem("cookingstove",		ITEMCAT_DEPLOYABLES,			20,				"weapon_zs_cookstove").Countables = "prop_cookstove"
+GM:AddPointShopItem("fridgestorage",	ITEMCAT_DEPLOYABLES,			40,				"weapon_zs_fridgestorage").Countables = "prop_fridgestorage"
 GM:AddPointShopItem("msgbeacon",		ITEMCAT_DEPLOYABLES,			10,				"weapon_zs_messagebeacon").Countables = "prop_messagebeacon"
 GM:AddPointShopItem("camera",			ITEMCAT_DEPLOYABLES,			15,				"weapon_zs_camera").Countables = "prop_camera"
 GM:AddPointShopItem("tv",				ITEMCAT_DEPLOYABLES,			25,				"weapon_zs_tv").Countables = "prop_tv"
