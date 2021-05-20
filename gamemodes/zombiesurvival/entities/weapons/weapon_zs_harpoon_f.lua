@@ -64,7 +64,7 @@ end
 function SWEP:PrimaryAttack()
 	if not self:CanPrimaryAttack() then return end
 	local owner = self:GetOwner()
-	self:SetNextAttack(CurTime() +  (.45 + (owner:Health() * .0135)))
+	self:SetNextAttack()
 	self:GetOwner():TakeSpecialDamage((owner:Health()*0.03), DMG_BURN, self:GetOwner(), self)
 
 	if self.SwingTime == 0 then
@@ -72,6 +72,12 @@ function SWEP:PrimaryAttack()
 	else
 		self:StartSwinging()
 	end
+end
+
+function SWEP:SetNextAttack()
+	local owner = self:GetOwner()
+	local armdelay = owner:GetMeleeSpeedMul()
+	self:SetNextPrimaryFire(CurTime() +  (.45 + (owner:Health() * .0135)))
 end
 
 function SWEP:SecondaryAttack()
