@@ -745,6 +745,11 @@ cvars.AddChangeCallback("zs_roundlimit", function(cvar, oldvalue, newvalue)
 	GAMEMODE.RoundLimit = tonumber(newvalue) or 3
 end)
 
+GM.ClassicMusic = CreateConVar("zs_classicmusic", "0", FCVAR_ARCHIVE + FCVAR_NOTIFY, "Should we use the classic gamemode's music"):GetInt()
+cvars.AddChangeCallback("zs_classicmusic", function(cvar, oldvalue, newvalue)
+	GAMEMODE.ClassicMusic = tonumber(newvalue) or 0
+end)
+
 -- Static values that don't need convars...
 
 -- Initial length for wave 1.
@@ -777,18 +782,32 @@ GM.ResupplyBoxCooldown = 30 --60
 -- How long do humans have to wait before being able to get more food items from a fridge?
 GM.FridgeStorageCooldown = 140
 
--- Put your unoriginal, 5MB Rob Zombie and Metallica music here.
-GM.LastHumanSound = Sound("zombiesurvival/lasthuman.ogg")
 
--- Sound played when humans all die.
-GM.AllLoseSound = Sound("zombiesurvival/music_lose.ogg")
+local function SetMusic()
+	if GetConVar("zs_classicmusic"):GetInt() == 0 then
+		-- Put your unoriginal, 5MB Rob Zombie and Metallica music here.
+		GM.LastHumanSound = Sound("zombiesurvival/lasthuman_" .. math.random(1, 4) ..".mp3")
 
--- Sound played when humans survive.
-GM.HumanWinSound = Sound("zombiesurvival/music_win.ogg")
+		-- Sound played when humans all die.
+		GM.AllLoseSound = Sound("zombiesurvival/music_lose_new.mp3")
 
--- Sound played to a person when they die as a human.
-GM.DeathSound = Sound("zombiesurvival/human_death_stinger.ogg")
+		-- Sound played when humans survive.
+		GM.HumanWinSound = Sound("zombiesurvival/music_win_new.mp3")
 
+		-- Sound played to a person when they die as a human.
+		GM.DeathSound = Sound("zombiesurvival/human_death_stinger_new.wav")
+	else
+		GM.LastHumanSound = Sound("zombiesurvival/lasthuman.ogg")
+
+		GM.AllLoseSound = Sound("zombiesurvival/music_lose.ogg")
+
+		GM.HumanWinSound = Sound("zombiesurvival/music_win.ogg")
+
+		GM.DeathSound = Sound("zombiesurvival/human_death_stinger.ogg")
+	end
+end
+
+hook.Add("Initialize", "SetUpMusic", SetMusic())
 -- Fetch map profiles and node profiles from noxiousnet database?
 GM.UseOnlineProfiles = true
 

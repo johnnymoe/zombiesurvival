@@ -20,4 +20,4 @@ SWEP.WorldModel = "models/foodnhouseholditems/cheesewheel1c.mdl"
 SWEP.Primary.Ammo = "slicecheese"
 
 SWEP.FoodHealth = 2
-SWEP.FoodEatTime = 9
+SWEP.FoodEatTime = 1
