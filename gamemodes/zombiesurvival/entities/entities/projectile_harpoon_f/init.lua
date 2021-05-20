@@ -36,7 +36,7 @@ function ENT:Hit(vHitPos, vHitNormal, vel, hitent)
 	local owner = self:GetOwner()
 
 	if hitent and hitent:IsValid() and hitent:IsPlayer() then
-		hitent:AddLegDamage(30)
+		--hitent:AddLegDamage(30)
 
 		local ent = ents.Create("prop_harpoon_f")
 		if ent:IsValid() then

@@ -1,7 +1,7 @@
 AddCSLuaFile()
 
 SWEP.PrintName = "Fierce Harpoon"
-SWEP.Description = "Unlimited Harpoons. Multiple attacks will stack additional damage. Each attack drains 0.3% of your current health."
+SWEP.Description = "Unlimited Harpoons. Multiple attacks will stack additional damage. Each attack drains 0.3% of your current health. The lower your health, the faster the harpoon fires."
 
 if CLIENT then
 	SWEP.ViewModelFOV = 60
@@ -59,6 +59,19 @@ end
 
 function SWEP:PlayHitFleshSound()
 	self:EmitSound("weapons/knife/knife_hit"..math.random(4)..".wav", 80, math.random(80, 85))
+end
+
+function SWEP:PrimaryAttack()
+	if not self:CanPrimaryAttack() then return end
+	local owner = self:GetOwner()
+	self:SetNextAttack(CurTime() +  (.45 + (owner:Health() * .0135)))
+	self:GetOwner():TakeSpecialDamage((owner:Health()*0.03), DMG_BURN, self:GetOwner(), self)
+
+	if self.SwingTime == 0 then
+		self:MeleeSwing()
+	else
+		self:StartSwinging()
+	end
 end
 
 function SWEP:SecondaryAttack()
