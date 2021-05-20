@@ -64,7 +64,7 @@ SWEP.ConeMin = 5.25
 SWEP.FireAnimSpeed = 1
 SWEP.WalkSpeed = SPEED_SLOWER
 
-SWEP.Tier = 3
+SWEP.Tier = 2
 
 GAMEMODE:AttachWeaponModifier(SWEP, WEAPON_MODIFIER_SHOT_COUNT, 1)
 GAMEMODE:AttachWeaponModifier(SWEP, WEAPON_MODIFIER_RELOAD_SPEED, 0.1, 1)
