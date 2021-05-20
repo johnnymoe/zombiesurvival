@@ -51,7 +51,7 @@ function GM:LoadVault(pl)
 			contents = Deserialize(contents)
 			if contents then
 				pl.PointsVault = contents.Points
-
+				
 				if contents.RemortLevel then
 					pl:SetZSRemortLevel(contents.RemortLevel)
 				end

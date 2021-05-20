@@ -200,6 +200,10 @@ GM:AddStartingItem("remantler",			ITEMCAT_DEPLOYABLES,			20,				"weapon_zs_reman
 .Countables = "prop_remantler"
 GM:AddStartingItem("crafttbl",			ITEMCAT_DEPLOYABLES,			20,				"weapon_zs_craftstation")
 .Countables = "prop_craftstation"
+GM:AddStartingItem("cookingstove",		ITEMCAT_DEPLOYABLES,			20,				"weapon_zs_cookstove")
+.Countables = "prop_cookstove"
+GM:AddStartingItem("fridgestorage",	ITEMCAT_DEPLOYABLES,			40,				"weapon_zs_fridgestorage")
+.Countables = "prop_fridgestorage"
 --item =
 --GM:AddStartingItem("infturret",			ITEMCAT_DEPLOYABLES,			50,				"weapon_zs_gunturret",			nil,							nil,									nil,											function(pl) pl:GiveEmptyWeapon("weapon_zs_gunturret") pl:GiveAmmo(1, "thumper") pl:GiveAmmo(125, "smg1") end)
 --item.Countables = "prop_gunturret"
@@ -451,6 +455,8 @@ GM:AddPointShopItem("arsenalcrate",		ITEMCAT_DEPLOYABLES,			40,				"weapon_zs_ar
 GM:AddPointShopItem("craftstation",		ITEMCAT_DEPLOYABLES,			20,				"weapon_zs_craftstation").Countables = "prop_craftstation"
 GM:AddPointShopItem("resupplybox",		ITEMCAT_DEPLOYABLES,			40,				"weapon_zs_resupplybox").Countables = "prop_resupplybox"
 GM:AddPointShopItem("remantler",		ITEMCAT_DEPLOYABLES,			20,				"weapon_zs_remantler").Countables = "prop_remantler"
+GM:AddPointShopItem("cookingstove",		ITEMCAT_DEPLOYABLES,			20,				"weapon_zs_cookstove").Countables = "prop_cookstove"
+GM:AddPointShopItem("fridgestorage",	ITEMCAT_DEPLOYABLES,			40,				"weapon_zs_fridgestorage").Countables = "prop_fridgestorage"
 GM:AddPointShopItem("msgbeacon",		ITEMCAT_DEPLOYABLES,			10,				"weapon_zs_messagebeacon").Countables = "prop_messagebeacon"
 GM:AddPointShopItem("camera",			ITEMCAT_DEPLOYABLES,			15,				"weapon_zs_camera").Countables = "prop_camera"
 GM:AddPointShopItem("tv",				ITEMCAT_DEPLOYABLES,			25,				"weapon_zs_tv").Countables = "prop_tv"
@@ -745,6 +751,11 @@ cvars.AddChangeCallback("zs_roundlimit", function(cvar, oldvalue, newvalue)
 	GAMEMODE.RoundLimit = tonumber(newvalue) or 3
 end)
 
+GM.ClassicMusic = CreateConVar("zs_classicmusic", "0", FCVAR_ARCHIVE + FCVAR_NOTIFY, "Should we use the classic gamemode's music"):GetInt()
+cvars.AddChangeCallback("zs_classicmusic", function(cvar, oldvalue, newvalue)
+	GAMEMODE.ClassicMusic = tonumber(newvalue) or 0
+end)
+
 -- Static values that don't need convars...
 
 -- Initial length for wave 1.
@@ -777,18 +788,32 @@ GM.ResupplyBoxCooldown = 30 --60
 -- How long do humans have to wait before being able to get more food items from a fridge?
 GM.FridgeStorageCooldown = 140
 
--- Put your unoriginal, 5MB Rob Zombie and Metallica music here.
-GM.LastHumanSound = Sound("zombiesurvival/lasthuman.ogg")
 
--- Sound played when humans all die.
-GM.AllLoseSound = Sound("zombiesurvival/music_lose.ogg")
+local function SetMusic()
+	if GetConVar("zs_classicmusic"):GetInt() == 0 then
+		-- Put your unoriginal, 5MB Rob Zombie and Metallica music here.
+		GM.LastHumanSound = Sound("zombiesurvival/lasthuman_" .. math.random(1, 4) ..".mp3")
 
--- Sound played when humans survive.
-GM.HumanWinSound = Sound("zombiesurvival/music_win.ogg")
+		-- Sound played when humans all die.
+		GM.AllLoseSound = Sound("zombiesurvival/music_lose_new.mp3")
 
--- Sound played to a person when they die as a human.
-GM.DeathSound = Sound("zombiesurvival/human_death_stinger.ogg")
+		-- Sound played when humans survive.
+		GM.HumanWinSound = Sound("zombiesurvival/music_win_new.mp3")
 
+		-- Sound played to a person when they die as a human.
+		GM.DeathSound = Sound("zombiesurvival/human_death_stinger_new.wav")
+	else
+		GM.LastHumanSound = Sound("zombiesurvival/lasthuman.ogg")
+
+		GM.AllLoseSound = Sound("zombiesurvival/music_lose.ogg")
+
+		GM.HumanWinSound = Sound("zombiesurvival/music_win.ogg")
+
+		GM.DeathSound = Sound("zombiesurvival/human_death_stinger.ogg")
+	end
+end
+
+hook.Add("Initialize", "SetUpMusic", SetMusic())
 -- Fetch map profiles and node profiles from noxiousnet database?
 GM.UseOnlineProfiles = true
 

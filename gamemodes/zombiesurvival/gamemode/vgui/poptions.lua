@@ -141,6 +141,12 @@ function MakepOptions()
 	check:SetConVar("zs_playmusic")
 	check:SizeToContents()
 	list:AddItem(check)
+	
+	check = vgui.Create("DCheckBoxLabel", Window)
+	check:SetText("Enable classic gamemode music")
+	check:SetConVar("zs_classicmusic")
+	check:SizeToContents()
+	list:AddItem(check)
 
 	check = vgui.Create("DCheckBoxLabel", Window)
 	check:SetText("Enable post processing")
