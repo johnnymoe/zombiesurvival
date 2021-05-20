@@ -1,0 +1,31 @@
+"Vertexlitgeneric"
+{
+		//defining textures
+		$basetexture					"models\weapons\v_models\Requests\EdgeStylez's WA2000\WA2000-D"
+		$bumpmap						"models\weapons\v_models\Requests\EdgeStylez's WA2000\WA2000-NS"
+		$phongexponenttexture			"models\weapons\v_models\Requests\EdgeStylez's WA2000\WA2000-EXP"
+		
+		//some random variables
+		$normalmapalphaenvmapmask		1
+		$normalmapalphaphongmask		1
+		$nocull							1
+		
+		//envmap reflection
+		$envmap							env_cubemap
+		$envmaptint						"[ 0.09 0.1 0.12 ]"
+		$envmapfresnel					1
+		
+		//phong
+		$phong							1
+		$phongboost						5
+		$phongtint						"[ 0.9 0.9 1.1 ]"
+		$phongfresnelranges				"[ 1.2 1.8 2.4 ]"
+		$phongalbedotint				1
+		$phongalbedoboost				24
+		
+		//rimlight
+		$rimlight						1
+		$rimlightexponent				60
+		$rimlightmask					1
+		$rimlightboost					0.2
+}

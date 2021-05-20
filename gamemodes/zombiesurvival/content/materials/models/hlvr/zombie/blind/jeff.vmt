@@ -1,0 +1,18 @@
+"VertexlitGeneric"
+{
+//Base
+	"$basetexture" 					"models\hlvr\zombie\blind\blind_zombie_d"
+	"$bumpmap" 						"models\hlvr\zombie\blind\blind_zombie_n"
+	"$phongexponenttexture" 		"models\hlvr\zombie\blind\blind_zombie_p"
+
+	"$phongalbedotint"				"1"
+
+//Phong
+	"$phong" 						"1"
+	"$phongboost"					"0"
+	"$phongfresnelranges"			"[0.87 0.9 1]"
+	"$phongexponent"			"5"
+
+	"$ambientocclusion"				"1"
+	"$nocull" 			"1"
+}

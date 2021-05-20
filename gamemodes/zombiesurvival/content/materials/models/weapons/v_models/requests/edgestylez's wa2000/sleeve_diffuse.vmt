@@ -1,0 +1,5 @@
+VertexLitGeneric
+{
+"$baseTexture" "models\weapons\v_models\Requests\EdgeStylez's WA2000/sleeve_diffuse"
+"$bumpmap"     "models\weapons\v_models\Requests\EdgeStylez's WA2000/sleeve_diffuse_normal"
+}

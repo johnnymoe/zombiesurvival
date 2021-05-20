@@ -1,0 +1,19 @@
+"Vertexlitgeneric"
+{
+    "$basetexture"                  "models\weapons\v_models\Requests\EdgeStylez's WA2000\wa2000_lense"
+    "$bumpmap"                      "models\weapons\v_models\Requests\EdgeStylez's WA2000\wa2000_lense_normal"
+
+    "$envmap"                       "env_cubemap"
+    "$envmapcontrast"               "0.9"
+    "$envmaptint"                   "[0.65 0.65 0.65]"	
+    "$envmapsaturation"             "0.7"
+	
+    "$normalmapalphaenvmapmask"     "1" 
+
+    "$phong"                        "1"	
+    "$phongalbedotint"              "1" 
+    "$phongboost"                   "0.85"
+    "$phongfresnelranges"           "[1 7 4]"	
+
+    "$translucent"                  "1"	
+}

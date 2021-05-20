@@ -1,0 +1,22 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/mosi/fnv/props/workstations/workbench"
+	"$bumpmap" "models/mosi/fnv/props/workstations/workbench_n"
+	"$halflambert" "1"
+	
+	$detail detail\metal_detail_01
+	$detailscale 4.283
+	$detailblendfactor .75
+	$detailblendmode 0
+	
+	"$envmap" "env_cubemap"
+	"$normalmapalphaenvmapmask" "1"
+	"$envmaptint" "[1 1 1]"
+	"$envmapfresnel" "1"
+	
+	"$phong"	"1"
+	"$phongexponent"	".1"
+	"$phongboost" "1"
+	"$phongfresnelranges"	"[1 1 1]"
+}
+
