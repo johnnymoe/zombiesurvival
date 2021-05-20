@@ -24,7 +24,7 @@ AddCSLuaFile("sh_animations.lua")
 AddCSLuaFile("sh_sigils.lua")
 AddCSLuaFile("sh_channel.lua")
 AddCSLuaFile("sh_weaponquality.lua")
-
+AddCSLuaFile("sh_achievements_list.lua")
 AddCSLuaFile("vault/shared.lua")
 
 AddCSLuaFile("cl_draw.lua")
@@ -40,6 +40,7 @@ AddCSLuaFile("cl_dermaskin.lua")
 AddCSLuaFile("cl_hint.lua")
 AddCSLuaFile("cl_thirdperson.lua")
 AddCSLuaFile("cl_voicesets.lua")
+AddCSLuaFile("cl_achievement.lua")
 
 AddCSLuaFile("skillweb/sh_skillweb.lua")
 AddCSLuaFile("skillweb/cl_skillweb.lua")
@@ -109,6 +110,8 @@ include("skillweb/sv_skillweb.lua")
 include("sv_zombieescape.lua")
 
 include("zsbots/init.lua")
+
+include("sv_achievement_management.lua")
 
 include_library("statistics")
 
@@ -525,6 +528,10 @@ function GM:AddNetworkStrings()
 	util.AddNetworkString("voice_zombiedeath")
 	util.AddNetworkString("voice_pain")
 	util.AddNetworkString("voice_zombiepain")
+	
+	util.AddNetworkString("ZS_EarnedAchievement")
+	util.AddNetworkString("ZS_NotifyAchievement")
+	util.AddNetworkString("ZS_UpdateAchievement")
 end
 
 function GM:IsClassicMode()
@@ -3514,6 +3521,7 @@ function GM:HumanKilledZombie(pl, attacker, inflictor, dmginfo, headshot, suicid
 end
 
 function GM:PostHumanKilledZombie(pl, attacker, inflictor, dmginfo, assistpl, assistamount, headshot)
+	--UpdateNotify(pl, attacker, inflictor, assistpl, headshot)
 end
 
 function GM:ZombieKilledHuman(pl, attacker, inflictor, dmginfo, headshot, suicide)

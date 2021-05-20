@@ -2,7 +2,7 @@ AddCSLuaFile()
 
 SWEP.Base = "weapon_zs_basefood"
 
-SWEP.PrintName = "Chinese Takeout"
+SWEP.PrintName = "Uncooked Chinese Takeout"
 
 if CLIENT then
 	SWEP.VElements = {
@@ -19,5 +19,5 @@ SWEP.WorldModel = "models/props_junk/garbage_takeoutcarton001a.mdl"
 
 SWEP.Primary.Ammo = "foodtakeout"
 
-SWEP.FoodHealth = 17
-SWEP.FoodEatTime = 5
+SWEP.FoodHealth = 3
+SWEP.FoodEatTime = 8

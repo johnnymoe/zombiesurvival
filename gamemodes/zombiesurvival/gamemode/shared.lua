@@ -58,6 +58,7 @@ include("sh_animations.lua")
 include("sh_sigils.lua")
 include("sh_channel.lua")
 include("sh_weaponquality.lua")
+include("sh_achievements_list.lua")
 
 include("noxapi/noxapi.lua")
 
@@ -93,6 +94,10 @@ GM.SoundDuration = {
 	["zombiesurvival/music_win.ogg"] = 33.149,
 	["zombiesurvival/music_lose.ogg"] = 45.714,
 	["zombiesurvival/lasthuman.ogg"] = 120.503,
+	["zombiesurvival/lasthuman_1.mp3"] = 165,
+	["zombiesurvival/lasthuman_2.mp3"] = 90,
+	["zombiesurvival/lasthuman_3.mp3"] = 132,
+	["zombiesurvival/lasthuman_4.mp3"] = 202,
 
 	["zombiesurvival/beats/defaulthuman/1.ogg"] = 7.111,
 	["zombiesurvival/beats/defaulthuman/2.ogg"] = 7.111,

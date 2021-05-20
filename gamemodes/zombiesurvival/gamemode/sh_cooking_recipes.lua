@@ -48,3 +48,78 @@ local smoothie_recipe = {
 
 InsertCookTbl(smoothie_recipe)
 
+local cookedmeat_recipe = {
+	["Name"] = "Cooked Meat",
+	["Recipes"] = {
+		["weapon_zs_f_rawmeat"] = 1
+	},
+	
+	["Desc"] = "REQUIRES: 1 Raw Meat",
+	["Icon"] = "zombiesurvival/killicons/food",
+	["Result"] = "weapon_zs_f_c_meat",
+	["Reward"] = 7
+}
+
+InsertCookTbl(cookedmeat_recipe)
+
+local cookedtakeout_recipe = {
+	["Name"] = "Cooked Chinese Takeout",
+	["Recipes"] = {
+		["weapon_zs_f_takeout"] = 1
+	},
+	
+	["Desc"] = "REQUIRES: 1 Uncooked Chinese Takeout",
+	["Icon"] = "zombiesurvival/killicons/food",
+	["Result"] = "weapon_zs_f_c_takeout",
+	["Reward"] = 4
+}
+
+InsertCookTbl(cookedtakeout_recipe)
+
+local cheeseburger_recipe = {
+	["Name"] = "Cheeseburger",
+	["Recipes"] = {
+		["weapon_zs_f_rawmeat"] = 1,
+		["weapon_zs_f_slicecheese"] = 1,
+		["weapon_zs_f_breadpiece"] = 1,
+	},
+	
+	["Desc"] = "REQUIRES: 1 Piece of Bread, 1 Uncooked meat, 1 Slice of Cheese",
+	["Icon"] = "zombiesurvival/killicons/food",
+	["Result"] = "weapon_zs_f_c_cheeseburger",
+	["Reward"] = 15
+}
+
+InsertCookTbl(cheeseburger_recipe)
+
+local doublecheeseburger_recipe = {
+	["Name"] = "Double Cheeseburger",
+	["Recipes"] = {
+		["weapon_zs_f_rawmeat"] = 1,
+		["weapon_zs_f_slicecheese"] = 1,
+		["weapon_zs_f_breadpiece"] = 1,
+	},
+	
+	["Desc"] = "REQUIRES: 1 Cheeseburger, 1 Piece of Bread, 1 Uncooked meat, 1 Slice of Cheese",
+	["Icon"] = "zombiesurvival/killicons/food",
+	["Result"] = "weapon_zs_f_c_doublecheeseburger",
+	["Reward"] = 35
+}
+
+InsertCookTbl(doublecheeseburger_recipe)
+
+local baconeggs_recipe = {
+	["Name"] = "Bacon and Eggs",
+	["Recipes"] = {
+		["weapon_zs_f_bacon"] = 1,
+		["weapon_zs_f_egg"] = 1,
+	},
+	
+	["Desc"] = "REQUIRES: 1 Bacon, 1 Egg",
+	["Icon"] = "zombiesurvival/killicons/food",
+	["Result"] = "weapon_zs_f_c_baconeggs",
+	["Reward"] = 35
+}
+
+InsertCookTbl(baconeggs_recipe)
+

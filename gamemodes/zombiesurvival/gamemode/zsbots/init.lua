@@ -604,6 +604,10 @@ concommand.Add("createnavmesh", function(sender, command, arguments)
 	end
 end)
 
+concommand.Add("zs_testach", function(ply, cmd, args)
+	ply:GiveAchievement("Zombie Killer 1")
+end)
+
 local ENT = {}
 
 ENT.Type = "nextbot"

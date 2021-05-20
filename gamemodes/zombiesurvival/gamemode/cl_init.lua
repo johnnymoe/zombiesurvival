@@ -63,6 +63,8 @@ include("itemstocks/cl_stock.lua")
 
 include("cl_zombieescape.lua")
 
+include("cl_achievement.lua")
+
 w, h = ScrW(), ScrH()
 
 MySelf = MySelf or NULL

@@ -196,7 +196,7 @@ GM:AddStartingItem("arscrate",			ITEMCAT_DEPLOYABLES,			40,				"weapon_zs_arsena
 .Countables = "prop_arsenalcrate"
 GM:AddStartingItem("resupplybox",		ITEMCAT_DEPLOYABLES,			40,				"weapon_zs_resupplybox")
 .Countables = "prop_resupplybox"
-GM:AddStartingItem("remantler",			ITEMCAT_DEPLOYABLES,			40,				"weapon_zs_remantler")
+GM:AddStartingItem("remantler",			ITEMCAT_DEPLOYABLES,			20,				"weapon_zs_remantler")
 .Countables = "prop_remantler"
 GM:AddStartingItem("crafttbl",			ITEMCAT_DEPLOYABLES,			20,				"weapon_zs_craftstation")
 .Countables = "prop_craftstation"
@@ -325,6 +325,7 @@ GM:AddPointShopItem("hurricane",		ITEMCAT_GUNS,			35,				"weapon_zs_hurricane")
 -- Tier 3
 GM:AddPointShopItem("deagle",			ITEMCAT_GUNS,			70,				"weapon_zs_deagle")
 GM:AddPointShopItem("tempest",			ITEMCAT_GUNS,			70,				"weapon_zs_tempest")
+GM:AddPointShopItem("fracture",			ITEMCAT_GUNS,			70,				"weapon_zs_fracture")
 GM:AddPointShopItem("ender",			ITEMCAT_GUNS,			70,				"weapon_zs_ender")
 GM:AddPointShopItem("shredder",			ITEMCAT_GUNS,			70,				"weapon_zs_smg")
 GM:AddPointShopItem("silencer",			ITEMCAT_GUNS,			70,				"weapon_zs_silencer")
@@ -449,7 +450,7 @@ GM:AddPointShopItem("wrench",			ITEMCAT_TOOLS,			20,				"weapon_zs_wrench").NoCl
 GM:AddPointShopItem("arsenalcrate",		ITEMCAT_DEPLOYABLES,			40,				"weapon_zs_arsenalcrate").Countables = "prop_arsenalcrate"
 GM:AddPointShopItem("craftstation",		ITEMCAT_DEPLOYABLES,			20,				"weapon_zs_craftstation").Countables = "prop_craftstation"
 GM:AddPointShopItem("resupplybox",		ITEMCAT_DEPLOYABLES,			40,				"weapon_zs_resupplybox").Countables = "prop_resupplybox"
-GM:AddPointShopItem("remantler",		ITEMCAT_DEPLOYABLES,			40,				"weapon_zs_remantler").Countables = "prop_remantler"
+GM:AddPointShopItem("remantler",		ITEMCAT_DEPLOYABLES,			20,				"weapon_zs_remantler").Countables = "prop_remantler"
 GM:AddPointShopItem("msgbeacon",		ITEMCAT_DEPLOYABLES,			10,				"weapon_zs_messagebeacon").Countables = "prop_messagebeacon"
 GM:AddPointShopItem("camera",			ITEMCAT_DEPLOYABLES,			15,				"weapon_zs_camera").Countables = "prop_camera"
 GM:AddPointShopItem("tv",				ITEMCAT_DEPLOYABLES,			25,				"weapon_zs_tv").Countables = "prop_tv"
@@ -734,9 +735,9 @@ cvars.AddChangeCallback("zs_timelimit", function(cvar, oldvalue, newvalue)
 	end
 end)
 
-GM.DeployableRange = CreateConVar("zs_deployrange", 225, FCVAR_ARCHIVE + FCVAR_NOTIFY, "How far deployables need to be separate from in whole numbers"):GetInt()
+GM.DeployableRange = CreateConVar("zs_deployrange", 1, FCVAR_ARCHIVE + FCVAR_NOTIFY, "How far deployables need to be separate from in whole numbers"):GetInt()
 cvars.AddChangeCallback("zs_deployrange", function(cvar, oldvalue, newvalue)
-	GAMEMODE.DeployableRange = tonumber(newvalue) or 225
+	GAMEMODE.DeployableRange = tonumber(newvalue) or 1
 end)
 
 GM.RoundLimit = CreateConVar("zs_roundlimit", "0", FCVAR_ARCHIVE + FCVAR_NOTIFY, "How many times the game can be played on the same map. -1 means infinite or only use time limit. 0 means once."):GetInt()
@@ -759,13 +760,13 @@ GM.NoNewHumansWave = 2
 GM.NoSuicideWave = 1
 
 -- How long 'wave 0' should last in seconds. This is the time you should give for new players to join and get ready.
-GM.WaveZeroLength = 150
+GM.WaveZeroLength = 180 --150
 
 -- Time humans have between waves to do stuff without NEW zombies spawning. Any dead zombies will be in spectator (crow) view and any living ones will still be living.
 GM.WaveIntermissionLength = 60
 
 -- Time in seconds between end round and next map.
-GM.EndGameTime = 30 --45
+GM.EndGameTime = 15 --45
 
 -- How many clips of ammo guns from the Worth menu start with. Some guns such as shotguns and sniper rifles have multipliers on this.
 GM.SurvivalClips = 4 --2

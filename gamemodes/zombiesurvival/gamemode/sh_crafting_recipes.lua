@@ -154,18 +154,18 @@ local tithonus_recipe = {
 }
 InsertRecipeTbl(tithonus_recipe)
 
-local fracture_recipe = {
-	["Name"] = "'Fracture' Shotgun",
-	["Recipes"] = {
-		["comp_pumpaction"] = 1
-	},
-	["Desc"] = "REQUIRES: 1 Pump action, 1 Sawed-Off",
-	["Icon"] = "zombiesurvival/killicons/weapon_zs_fracture2",
-	["Weapon"] = "weapon_zs_sawedoff",
-	["Result"] = "weapon_zs_fracture",
-	["Reward"] = 10
-}
-InsertRecipeTbl(fracture_recipe)
+-- local fracture_recipe = {
+	-- ["Name"] = "'Fracture' Shotgun",
+	-- ["Recipes"] = {
+		-- ["comp_pumpaction"] = 1
+	-- },
+	-- ["Desc"] = "REQUIRES: 1 Pump action, 1 Sawed-Off",
+	-- ["Icon"] = "zombiesurvival/killicons/weapon_zs_fracture2",
+	-- ["Weapon"] = "weapon_zs_sawedoff",
+	-- ["Result"] = "weapon_zs_fracture",
+	-- ["Reward"] = 10
+-- }
+-- InsertRecipeTbl(fracture_recipe)
 
 local seditionist_recipe = {
 	["Name"] = "'Seditionist' Handgun",
@@ -289,9 +289,9 @@ local ripper_recipe = {
 	["Recipes"] = {
 		["comp_sawblade"] = 1
 	},
-	["Desc"] = "REQUIRES: 1 Sawblade, 1 Zeus",
+	["Desc"] = "REQUIRES: 1 Sawblade, 1 Crossbow",
 	["Icon"] = "zombiesurvival/killicons/weapon_zs_ripper",
-	["Weapon"] = "weapon_zs_zeus",
+	["Weapon"] = "weapon_zs_crossbow",
 	["Result"] = "weapon_zs_ripper",
 	["Reward"] = 5
 }
@@ -348,6 +348,19 @@ local proliferator_recipe = {
 	["Reward"] = 5
 }
 InsertRecipeTbl(proliferator_recipe)
+
+local harpoon_f_recipe = {
+	["Name"] = "Fierce Harpoon",
+	["Recipes"] = {
+		["comp_launcher"] = 1
+	},
+	["Desc"] = "REQUIRES: 1 Launcher component, 1 Harpoon",
+	["Icon"] = "zombiesurvival/killicons/weapon_zs_harpoon2.png",
+	["Weapon"] = "weapon_zs_harpoon",
+	["Result"] = "weapon_zs_harpoon_f",
+	["Reward"] = 5
+}
+InsertRecipeTbl(harpoon_f_recipe)
 --[[
 -TODO, get trinkets to be taken away from player and rework crafting
 local electromagnet_recipe = {
