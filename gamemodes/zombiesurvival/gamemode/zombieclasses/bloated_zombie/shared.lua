@@ -7,7 +7,7 @@ CLASS.BetterVersion = "Eradicator"
 
 CLASS.Wave = 3 / 6
 
-CLASS.Health = 250
+CLASS.Health = 260
 CLASS.Speed = 190
 --CLASS.JumpPower = DEFAULT_JUMP_POWER * 0.811
 CLASS.Mass = DEFAULT_MASS * 2
