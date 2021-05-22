@@ -76,6 +76,16 @@ function SWEP:Move(mv)
 		mv:SetMaxClientSpeed(mv:GetMaxClientSpeed() * 5)
 		return true
 	end
+	
+	if self:IsBuilding() then
+		mv:SetMaxSpeed(0)
+		mv:SetMaxClientSpeed(0)
+	end
+	
+	if self:IsSwinging() then
+		mv:SetMaxSpeed(mv:GetMaxSpeed() / 2)
+		mv:SetMaxClientSpeed(mv:GetMaxSpeed() / 2)
+	end
 end
 
 function SWEP:ApplyMeleeDamage(ent, trace, damage)
