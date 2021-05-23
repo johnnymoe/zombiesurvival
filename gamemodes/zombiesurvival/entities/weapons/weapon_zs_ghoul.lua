@@ -7,9 +7,6 @@ SWEP.Base = "weapon_zs_zombie"
 SWEP.MeleeDamage = 16
 SWEP.SlowDownScale = 0.25
 SWEP.EnfeebleDurationMul = 10 / SWEP.MeleeDamage
---[[SWEP.MeleeForceScale = 0.1
-SWEP.SlowDownScale = 2.25
-SWEP.SlowDownImmunityTime = 2]]
 
 function SWEP:ApplyMeleeDamage(ent, trace, damage)
 	ent:PoisonDamage(damage, self:GetOwner(), self, trace.HitPos)

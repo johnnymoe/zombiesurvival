@@ -4,10 +4,9 @@ SWEP.PrintName = "Elder Ghoul"
 
 SWEP.Base = "weapon_zs_zombie"
 
-SWEP.MeleeDamage = 26
-SWEP.MeleeDamageVsProps = 22
-SWEP.MeleeForceScale = 0.5
+SWEP.MeleeDamage = 16
 SWEP.SlowDownScale = 0.25
+SWEP.EnfeebleDurationMul = 10 / SWEP.MeleeDamage
 
 function SWEP:ApplyMeleeDamage(ent, trace, damage)
 	ent:PoisonDamage(damage, self:GetOwner(), self, trace.HitPos)
@@ -61,7 +60,7 @@ local function DoFleshThrow(pl, wep)
 
 					local phys = ent:GetPhysicsObject()
 					if phys:IsValid() then
-						phys:SetVelocityInstantaneous(ang:Forward() * 350)
+						phys:SetVelocityInstantaneous(ang:Forward() * 660)
 					end
 				end
 			end
