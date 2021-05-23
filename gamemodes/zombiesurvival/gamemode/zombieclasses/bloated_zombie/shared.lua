@@ -5,7 +5,7 @@ CLASS.Help = "controls_bloated_zombie"
 
 CLASS.BetterVersion = "Eradicator"
 
-CLASS.Wave = 3 / 6
+CLASS.Wave = 3 / 5
 
 CLASS.Health = 260
 CLASS.Speed = 190

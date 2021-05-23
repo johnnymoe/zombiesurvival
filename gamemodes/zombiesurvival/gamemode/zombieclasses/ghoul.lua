@@ -6,7 +6,7 @@ CLASS.Help = "controls_ghoul"
 CLASS.Wave = 0
 CLASS.Unlocked = true
 
-CLASS.BetterVersion = "Noxious Ghoul"
+CLASS.BetterVersion = "Elder Ghoul"
 
 CLASS.Health = 130
 CLASS.Speed = 190

@@ -1,6 +1,6 @@
 CLASS.Base = "ghoul"
 
-CLASS.Wave = 5 / 6
+CLASS.Wave = 5 / 5
 
 CLASS.Name = "Noxious Ghoul"
 CLASS.TranslationName = "class_noxiousghoul"
