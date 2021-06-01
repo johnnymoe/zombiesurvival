@@ -18,8 +18,10 @@ CLASS.Points = 30
 
 CLASS.SWEP = "weapon_zs_nightmare"
 
-CLASS.Model = Model("models/player/zombie_classic_hbfix.mdl")
-CLASS.OverrideModel = Model("models/player/charple.mdl")
+CLASS.Model = Model("models/scp/106/unity/unity_scp_106_player.mdl")
+
+-- CLASS.Model = Model("models/player/zombie_classic_hbfix.mdl")
+-- CLASS.OverrideModel = Model("models/player/charple.mdl")
 
 CLASS.VoicePitch = 0.65
 
@@ -95,44 +97,44 @@ if not CLIENT then return end
 
 CLASS.Icon = "zombiesurvival/killicons/nightmare2"
 
-local function CreateBoneOffsets(pl)
-	pl.m_NightmareBoneOffsetsNext = CurTime() + math_Rand(0.02, 0.1)
+-- local function CreateBoneOffsets(pl)
+	-- pl.m_NightmareBoneOffsetsNext = CurTime() + math_Rand(0.02, 0.1)
 
-	local offsets = {}
-	local angs = {}
-	for i=1, pl:GetBoneCount() - 1 do
-		if math_random(3) == 3 then
-			offsets[i] = VectorRand():GetNormalized() * math.Rand(0.5, 3)
-		end
-		if math_random(5) == 5 then
-			angs[i] = Angle(math_Rand(-5, 5), math_Rand(-15, 15), math_Rand(-5, 5))
-		end
-	end
-	pl.m_NightmareBoneOffsets = offsets
-	pl.m_NightmareBoneAngles = angs
-end
+	-- local offsets = {}
+	-- local angs = {}
+	-- for i=1, pl:GetBoneCount() - 1 do
+		-- if math_random(3) == 3 then
+			-- offsets[i] = VectorRand():GetNormalized() * math.Rand(0.5, 3)
+		-- end
+		-- if math_random(5) == 5 then
+			-- angs[i] = Angle(math_Rand(-5, 5), math_Rand(-15, 15), math_Rand(-5, 5))
+		-- end
+	-- end
+	-- pl.m_NightmareBoneOffsets = offsets
+	-- pl.m_NightmareBoneAngles = angs
+-- end
 
-function CLASS:BuildBonePositions(pl)
-	if not pl.m_NightmareBoneOffsets or CurTime() >= pl.m_NightmareBoneOffsetsNext then
-		CreateBoneOffsets(pl)
-	end
+-- function CLASS:BuildBonePositions(pl)
+	-- if not pl.m_NightmareBoneOffsets or CurTime() >= pl.m_NightmareBoneOffsetsNext then
+		-- CreateBoneOffsets(pl)
+	-- end
 
-	local offsets = pl.m_NightmareBoneOffsets
-	local angs = pl.m_NightmareBoneAngles
-	for i=1, pl:GetBoneCount() - 1 do
-		if offsets[i] then
-			pl:ManipulateBonePosition(i, offsets[i])
-		end
-		if angs[i] then
-			pl:ManipulateBoneAngles(i, angs[i])
-		end
-	end
-end
+	-- local offsets = pl.m_NightmareBoneOffsets
+	-- local angs = pl.m_NightmareBoneAngles
+	-- for i=1, pl:GetBoneCount() - 1 do
+		-- if offsets[i] then
+			-- pl:ManipulateBonePosition(i, offsets[i])
+		-- end
+		-- if angs[i] then
+			-- pl:ManipulateBoneAngles(i, angs[i])
+		-- end
+	-- end
+-- end
 
-function CLASS:PrePlayerDraw(pl)
-	render.SetColorModulation(0.1, 0.1, 0.1)
-end
+-- function CLASS:PrePlayerDraw(pl)
+	-- render.SetColorModulation(0.1, 0.1, 0.1)
+-- end
 
-function CLASS:PostPlayerDraw(pl)
-	render.SetColorModulation(1, 1, 1)
-end
+-- function CLASS:PostPlayerDraw(pl)
+	-- render.SetColorModulation(1, 1, 1)
+-- end
