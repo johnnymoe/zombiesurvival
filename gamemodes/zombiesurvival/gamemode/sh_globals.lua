@@ -153,7 +153,7 @@ GM.BarricadeHealthMassFactor = 3 * 0.85
 GM.BarricadeHealthVolumeFactor = 4 * 0.85
 GM.BarricadeRepairCapacity = 1.25
 
-GM.BossZombiePlayersRequired = 8
+GM.BossZombiePlayersRequired = 16
 
 GM.HumanGibs = {
 Model("models/gibs/HGIBS.mdl"),
