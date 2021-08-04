@@ -1,5 +1,5 @@
 GM.MaxChannels = {}
-GM.MaxChannels["turret"] = 7
+GM.MaxChannels["turret"] = 16
 
 GM.ChannelsToClass = {}
 GM.ChannelsToClass["turret"] = {"prop_gunturret", "prop_gunturret_buckshot", "prop_gunturret_assault", "prop_gunturret_rocket"}
