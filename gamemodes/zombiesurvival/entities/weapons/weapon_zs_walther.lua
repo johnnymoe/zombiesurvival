@@ -31,7 +31,7 @@ SWEP.WElements = {
 
 SWEP.UseHands = true
 SWEP.Primary.Sound = Sound("weapons/walther/WA2000_Fire.wav")
-SWEP.Primary.Damage = 80
+SWEP.Primary.Damage = 72
 SWEP.Primary.NumShots = 1
 SWEP.Primary.Delay = 0.25
 SWEP.Recoil = .25

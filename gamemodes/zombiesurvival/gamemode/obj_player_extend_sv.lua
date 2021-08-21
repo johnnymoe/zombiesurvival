@@ -114,6 +114,8 @@ function meta:ProcessDamage(dmginfo)
 		if inflictor == attacker:GetActiveWeapon() then
 			local damage = dmginfo:GetDamage()
 
+			if self:IsBarricadeGhosting() then
+				self:SetLegDamage(21 * (self.SlowEffTakenMul or 1))
 			else
 				local scale = inflictor.SlowDownScale or 1
 				if damage >= 45 or scale > 1 then
