@@ -114,25 +114,6 @@ function meta:ProcessDamage(dmginfo)
 		if inflictor == attacker:GetActiveWeapon() then
 			local damage = dmginfo:GetDamage()
 
-			if self:IsBarricadeGhosting() then
-				self:SetLegDamage(21 * (self.SlowEffTakenMul or 1))
-			else
-				local scale = inflictor.SlowDownScale or 1
-				if damage >= 45 or scale > 1 then
-					local dolegdamage = true
-					if inflictor.SlowDownImmunityTime then
-						if CurTime() < (self.SlowDownImmunityTime or 0) then
-							dolegdamage = false
-						else
-							self.SlowDownImmunityTime = CurTime() + inflictor.SlowDownImmunityTime
-						end
-					end
-					if dolegdamage then
-						self:RawCapLegDamage(self:GetLegDamage() + CurTime() + damage * 0.04 * (inflictor.SlowDownScale or 1) * (self.SlowEffTakenMul or 1))
-					end
-				end
-			end
-
 			if bit.band(dmgtype, DMG_SLASH) ~= 0 or inflictor.IsMelee then
 				if self.BarbedArmor and self.BarbedArmor > 0 then
 					attacker:TakeSpecialDamage(self.BarbedArmor, DMG_SLASH, self, self)
