@@ -406,9 +406,9 @@ GM:AddPointShopItem("chemical",				ITEMCAT_AMMO,			5,				nil,							"20 chemical
 GM:AddPointShopItem("chemical2",			ITEMCAT_AMMO,			10,				nil,							"40 chemical vials",			nil,									"ammo_chemical",					function(pl) pl:GiveAmmo(40, "chemical", true) end)
 GM:AddPointShopItem("chemical2",			ITEMCAT_AMMO,			20,				nil,							"80 chemical vials",			nil,									"ammo_chemical",					function(pl) pl:GiveAmmo(80, "chemical", true) end)
 item =
-GM:AddPointShopItem("25mkit",				ITEMCAT_AMMO,			4,				nil,							"25 Medical Kit power",			"25 extra power for the Medical Kit.",	"ammo_medpower",					function(pl) pl:GiveAmmo(25, "Battery", true) end)
-GM:AddPointShopItem("50mkit",				ITEMCAT_AMMO,			8,				nil,							"50 Medical Kit power",			"50 extra power for the Medical Kit.",	"ammo_medpower",					function(pl) pl:GiveAmmo(50, "Battery", true) end)
-GM:AddPointShopItem("100mkit",				ITEMCAT_AMMO,			16,				nil,							"100 Medical Kit power",		"100 extra power for the Medical Kit.",	"ammo_medpower",					function(pl) pl:GiveAmmo(100, "Battery", true) end)
+GM:AddPointShopItem("25mkit",				ITEMCAT_AMMO,			5,				nil,							"25 Medical Kit power",			"25 extra power for the Medical Kit.",	"ammo_medpower",					function(pl) pl:GiveAmmo(25, "Battery", true) end)
+GM:AddPointShopItem("50mkit",				ITEMCAT_AMMO,			10,				nil,							"50 Medical Kit power",			"50 extra power for the Medical Kit.",	"ammo_medpower",					function(pl) pl:GiveAmmo(50, "Battery", true) end)
+GM:AddPointShopItem("100mkit",				ITEMCAT_AMMO,			20,				nil,							"100 Medical Kit power",		"100 extra power for the Medical Kit.",	"ammo_medpower",					function(pl) pl:GiveAmmo(100, "Battery", true) end)
 
 item.CanMakeFromScrap = true
 item =
