@@ -533,8 +533,8 @@ GM:AddPointShopItem("strengthshot",		ITEMCAT_TOOLS,			30,				"weapon_zs_strength
 item =
 GM:AddPointShopItem("antidote",			ITEMCAT_TOOLS,			30,				"weapon_zs_antidoteshot")
 --item.SkillRequirement = SKILL_U_ANTITODESHOT
-GM:AddPointShopItem("medrifle",			ITEMCAT_TOOLS,			120,				"weapon_zs_medicrifle")
-GM:AddPointShopItem("healray",			ITEMCAT_TOOLS,			120,			"weapon_zs_healingray")
+GM:AddPointShopItem("medrifle",			ITEMCAT_TOOLS,			100,				"weapon_zs_medicrifle")
+GM:AddPointShopItem("healray",			ITEMCAT_TOOLS,			125,				"weapon_zs_healingray")
 
 -- Tier 1
 GM:AddPointShopItem("cutlery",			ITEMCAT_TRINKETS,		10,				"trinket_cutlery").SubCategory =								ITEMSUBCAT_TRINKETS_DEFENSIVE
