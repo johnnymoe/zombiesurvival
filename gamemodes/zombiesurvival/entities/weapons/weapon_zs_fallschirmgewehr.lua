@@ -1,7 +1,7 @@
 AddCSLuaFile()
 DEFINE_BASECLASS("weapon_zs_base")
 
-SWEP.PrintName = "'Fallschirmgewehr"
+SWEP.PrintName = "'Fallschirmgewehr' FG 42"
 SWEP.Description = "Used by german Parachuters in the second world war, it still holds its status as a strong rifle today."
 
 SWEP.Slot = 2
@@ -128,11 +128,29 @@ function SWEP:EmitFireSound()
      
 end
 
+function SWEP:SendReloadAnimation()	
+self:SendWeaponAnim(ACT_VM_DRAW)
+end
+
+local ghostlerp = 0
+function SWEP:CalcViewModelView(vm, oldpos, oldang, pos, ang)
+if self:GetOwner():GetBarricadeGhosting() or self:GetReloadFinish() > 0 then
+ghostlerp = math.min(1, ghostlerp + FrameTime() * 0.1)
+elseif ghostlerp > 0 then
+ghostlerp = math.max(0, ghostlerp - FrameTime() * 0.9)
+end
+
+if ghostlerp > 0 then
+ang:RotateAroundAxis(ang:Right(), -65 * ghostlerp)
+end
+
+return pos, ang
+end
+
+SWEP.ReloadSpeed = 0.3
 
 
 //Made by DuffT. Thanks to Superspooner,Johnny Moe, and erdf 
 //Thanks to Worm for the idea to recreate this gun
 
-if CLIENT then
-	SWEP.IronsightsMultiplier = 1
-end
+

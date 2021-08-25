@@ -112,7 +112,7 @@ SWEP.WorldModel = "models/weapons/w_rif_m4a1.mdl"
 SWEP.UseHands = true
 
 SWEP.Primary.Sound = Sound("weapons/scout/scout_fire-1.wav")
-SWEP.Primary.Damage = 26
+SWEP.Primary.Damage = 23
 SWEP.Primary.NumShots = 1
 SWEP.Primary.Delay = 0.075
 
@@ -138,10 +138,63 @@ SWEP.IronSightsPos = Vector(-7.961, -7.393, 0.789)
 SWEP.IronSightsAng = Vector(0.007, -6.097, -0.528)
 
 GAMEMODE:AttachWeaponModifier(SWEP, WEAPON_MODIFIER_CLIP_SIZE, 3)
+GAMEMODE:AddNewRemantleBranch(SWEP, 1,"'Control' Burst M16", "Increases damage but turns the gun into fast burst fire",function (wept)
+
+wept.Primary.Damage = wept.Primary.Damage * 1.1
+wept.Primary.Delay = wept.Primary.Delay * 3.75
+wept.Primary.BurstShots = 3
+
+wept.PrimaryAttack = function(self)
+		if not self:CanPrimaryAttack() then return end
+
+		self:SetNextPrimaryFire(CurTime() + self:GetFireDelay())
+		self:EmitFireSound()
+
+		self:SetNextShot(CurTime())
+		self:SetShotsLeft(self.Primary.BurstShots)
+
+		self.IdleAnimation = CurTime() + self:SequenceDuration()
+	end
+
+	wept.Think = function(self)
+		BaseClass.Think(self)
+
+		local shotsleft = self:GetShotsLeft()
+		if shotsleft > 0 and CurTime() >= self:GetNextShot() then
+			self:SetShotsLeft(shotsleft - 1)
+			self:SetNextShot(CurTime() + self:GetFireDelay()/5)
+
+			if self:Clip1() > 0 and self:GetReloadFinish() == 0 then
+				self:EmitFireSound()
+				self:TakeAmmo()
+				self:ShootBullets(self.Primary.Damage, self.Primary.NumShots, self:GetCone())
+
+				self.IdleAnimation = CurTime() + self:SequenceDuration()
+			else
+				self:SetShotsLeft(0)
+			end
+		end
+	end
+wept.HUD3DPos = Vector(-1.2, -5, -1.2)
+
+end)
 
 
+function SWEP:SetNextShot(nextshot)
+	self:SetDTFloat(5, nextshot)
+end
 
+function SWEP:GetNextShot()
+	return self:GetDTFloat(5)
+end
 
+function SWEP:SetShotsLeft(shotsleft)
+	self:SetDTInt(1, shotsleft)
+end
+
+function SWEP:GetShotsLeft()
+	return self:GetDTInt(1)
+end
   
   
 

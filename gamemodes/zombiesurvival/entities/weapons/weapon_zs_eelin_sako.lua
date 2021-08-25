@@ -27,7 +27,7 @@ SWEP.ViewModel = "models/weapons/cstrike/c_snip_scout.mdl"
 SWEP.WorldModel = "models/weapons/w_snip_scout.mdl"
 SWEP.UseHands = true
 SWEP.ShowViewModel = true
-SWEP.ShowWorldModel = true
+SWEP.ShowWorldModel = false
 
 SWEP.ViewModelBoneMods = {
 	["ValveBiped.Bip01_L_Finger0"] = { scale = Vector(1, 1, 1), pos = Vector(0, 0, 0), angle = Angle(10.369, 0, 0) },
@@ -117,13 +117,13 @@ SWEP.Primary.Sound = Sound("weapons/p228/p228-1.wav")
 SWEP.Primary.Damage = 100
 SWEP.HeadshotMulti = 4
 SWEP.Primary.NumShots = 1
-SWEP.Primary.Delay = 1
+SWEP.Primary.Delay = 1.6
 SWEP.ReloadDelay = SWEP.Primary.Delay
 
-SWEP.Primary.ClipSize = 5
+SWEP.Primary.ClipSize = 3
 SWEP.Primary.Automatic = false
 SWEP.Primary.Ammo = "pulse"
-SWEP.Primary.DefaultClip = 5
+SWEP.Primary.DefaultClip = 3
 
 SWEP.Primary.Gesture = ACT_HL2MP_GESTURE_RANGE_ATTACK_CROSSBOW
 SWEP.ReloadGesture = ACT_HL2MP_GESTURE_RELOAD_SHOTGUN
@@ -138,16 +138,14 @@ SWEP.IronSightsAng = Vector(-0.504, 0.039, 0)
 SWEP.WalkSpeed = SPEED_SLOW
 
 
-
+SWEP.Tier = 5
+SWEP.MaxStock = 1
 
 
 function SWEP:EmitFireSound()
 	self:EmitSound(self.Primary.Sound, 100, math.random(145,170))
 end
 
-if CLIENT then
-	SWEP.IronsightsMultiplier = 2
-end
 
 function SWEP.BulletCallback(attacker, tr, dmginfo)
 	local ent = tr.Entity
@@ -160,4 +158,5 @@ function SWEP.BulletCallback(attacker, tr, dmginfo)
 	end
 end
 
+GAMEMODE:AttachWeaponModifier(SWEP, WEAPON_MODIFIER_RELOAD_SPEED, -0.1, 1)
 //Made by DuffT. Thanks to SuperSpooner along with Johnny Moe, erdf, MIL260 on Advice

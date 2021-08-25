@@ -360,10 +360,12 @@ GM:AddPointShopItem("quasar",			ITEMCAT_GUNS,			125,			"weapon_zs_quasar")
 GM:AddPointShopItem("gluon",			ITEMCAT_GUNS,			125,			"weapon_zs_gluon")
 GM:AddPointShopItem("barrage",			ITEMCAT_GUNS,			125,			"weapon_zs_barrage")
 GM:AddPointShopItem("fallschirmgewehr", ITEMCAT_GUNS,           150,            "weapon_zs_fallschirmgewehr")
+GM:AddPointShopItem("fool",             ITEMCAT_GUNS,           125,            "weapon_zs_fool")
 -- Tier 5
 GM:AddPointShopItem("novacolt",			ITEMCAT_GUNS,			200,			"weapon_zs_novacolt")
 GM:AddPointShopItem("bulwark",			ITEMCAT_GUNS,			200,			"weapon_zs_bulwark")
 GM:AddPointShopItem("juggernaut",		ITEMCAT_GUNS,			200,			"weapon_zs_juggernaut")
+GM:AddPointShopItem("eelis",            ITEMCAT_GUNS,           200,            "weapon_zs_eelin_sako")
 GM:AddPointShopItem("scar",				ITEMCAT_GUNS,			200,			"weapon_zs_scar")
 GM:AddPointShopItem("boomstick",		ITEMCAT_GUNS,			200,			"weapon_zs_boomstick")
 GM:AddPointShopItem("deathdlrs",		ITEMCAT_GUNS,			200,			"weapon_zs_deathdealers")
@@ -374,7 +376,6 @@ GM:AddPointShopItem("pulserifle",		ITEMCAT_GUNS,			200,			"weapon_zs_pulserifle"
 GM:AddPointShopItem("spinfusor",		ITEMCAT_GUNS,			200,			"weapon_zs_spinfusor")
 GM:AddPointShopItem("broadside",		ITEMCAT_GUNS,			200,			"weapon_zs_broadside")
 GM:AddPointShopItem("smelter",			ITEMCAT_GUNS,			200,			"weapon_zs_smelter")
-GM:AddPointShopItem("eelis",            ITEMCAT_GUNS,           200,            "weapon_zs_eelin_sako")
 GM:AddPointShopItem("fortunateone",     ITEMCAT_GUNS,           200,            "weapon_zs_un_fortunateson")
 
 GM:AddPointShopItem("pistolammo",			ITEMCAT_AMMO,			5,				nil,							"16 pistol ammo",				nil,									"ammo_pistol",						function(pl) pl:GiveAmmo(16, "pistol", true) end)
@@ -405,9 +406,9 @@ GM:AddPointShopItem("chemical",				ITEMCAT_AMMO,			5,				nil,							"20 chemical
 GM:AddPointShopItem("chemical2",			ITEMCAT_AMMO,			10,				nil,							"40 chemical vials",			nil,									"ammo_chemical",					function(pl) pl:GiveAmmo(40, "chemical", true) end)
 GM:AddPointShopItem("chemical2",			ITEMCAT_AMMO,			20,				nil,							"80 chemical vials",			nil,									"ammo_chemical",					function(pl) pl:GiveAmmo(80, "chemical", true) end)
 item =
-GM:AddPointShopItem("25mkit",				ITEMCAT_AMMO,			4,				nil,							"25 Medical Kit power",			"25 extra power for the Medical Kit.",	"ammo_medpower",					function(pl) pl:GiveAmmo(25, "Battery", true) end)
-GM:AddPointShopItem("50mkit",				ITEMCAT_AMMO,			8,				nil,							"50 Medical Kit power",			"50 extra power for the Medical Kit.",	"ammo_medpower",					function(pl) pl:GiveAmmo(50, "Battery", true) end)
-GM:AddPointShopItem("100mkit",				ITEMCAT_AMMO,			16,				nil,							"100 Medical Kit power",		"100 extra power for the Medical Kit.",	"ammo_medpower",					function(pl) pl:GiveAmmo(100, "Battery", true) end)
+GM:AddPointShopItem("25mkit",				ITEMCAT_AMMO,			5,				nil,							"25 Medical Kit power",			"25 extra power for the Medical Kit.",	"ammo_medpower",					function(pl) pl:GiveAmmo(25, "Battery", true) end)
+GM:AddPointShopItem("50mkit",				ITEMCAT_AMMO,			10,				nil,							"50 Medical Kit power",			"50 extra power for the Medical Kit.",	"ammo_medpower",					function(pl) pl:GiveAmmo(50, "Battery", true) end)
+GM:AddPointShopItem("100mkit",				ITEMCAT_AMMO,			20,				nil,							"100 Medical Kit power",		"100 extra power for the Medical Kit.",	"ammo_medpower",					function(pl) pl:GiveAmmo(100, "Battery", true) end)
 
 item.CanMakeFromScrap = true
 item =
@@ -452,6 +453,7 @@ GM:AddPointShopItem("scythe",			ITEMCAT_MELEE,			100,			"weapon_zs_scythe")
 GM:AddPointShopItem("powerfists",		ITEMCAT_MELEE,			100,			"weapon_zs_powerfists")
 -- Tier 5
 GM:AddPointShopItem("frotchet",			ITEMCAT_MELEE,			150,			"weapon_zs_frotchet")
+GM:AddPointShopItem("guitar",           ITEMCAT_MELEE,          300,            "weapon_zs_guitar")
 
 GM:AddPointShopItem("crphmr",			ITEMCAT_TOOLS,			25,				"weapon_zs_hammer",			nil,							nil,									nil,											function(pl) pl:GiveEmptyWeapon("weapon_zs_hammer") pl:GiveAmmo(5, "GaussEnergy") end)
 GM:AddPointShopItem("wrench",			ITEMCAT_TOOLS,			20,				"weapon_zs_wrench").NoClassicMode = true
@@ -531,8 +533,8 @@ GM:AddPointShopItem("strengthshot",		ITEMCAT_TOOLS,			30,				"weapon_zs_strength
 item =
 GM:AddPointShopItem("antidote",			ITEMCAT_TOOLS,			30,				"weapon_zs_antidoteshot")
 --item.SkillRequirement = SKILL_U_ANTITODESHOT
-GM:AddPointShopItem("medrifle",			ITEMCAT_TOOLS,			105,				"weapon_zs_medicrifle")
-GM:AddPointShopItem("healray",			ITEMCAT_TOOLS,			105,			"weapon_zs_healingray")
+GM:AddPointShopItem("medrifle",			ITEMCAT_TOOLS,			100,				"weapon_zs_medicrifle")
+GM:AddPointShopItem("healray",			ITEMCAT_TOOLS,			125,				"weapon_zs_healingray")
 
 -- Tier 1
 GM:AddPointShopItem("cutlery",			ITEMCAT_TRINKETS,		10,				"trinket_cutlery").SubCategory =								ITEMSUBCAT_TRINKETS_DEFENSIVE

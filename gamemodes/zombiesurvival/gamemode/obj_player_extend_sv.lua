@@ -114,7 +114,6 @@ function meta:ProcessDamage(dmginfo)
 		if inflictor == attacker:GetActiveWeapon() then
 			local damage = dmginfo:GetDamage()
 
-
 			if bit.band(dmgtype, DMG_SLASH) ~= 0 or inflictor.IsMelee then
 				if self.BarbedArmor and self.BarbedArmor > 0 then
 					attacker:TakeSpecialDamage(self.BarbedArmor, DMG_SLASH, self, self)
