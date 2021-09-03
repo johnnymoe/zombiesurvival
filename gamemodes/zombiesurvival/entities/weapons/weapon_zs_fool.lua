@@ -84,7 +84,7 @@ SWEP.ViewModelBoneMods = {
 SWEP.Primary.Sound = Sound("weapons/elite/elite-1.wav")
 SWEP.Primary.Damage = 31
 SWEP.Primary.NumShots = 1
-SWEP.Primary.Delay = 0.075
+SWEP.Primary.Delay = 0.045
 
 SWEP.Primary.ClipSize = 32
 SWEP.Primary.Automatic = false

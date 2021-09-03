@@ -1,20 +1,18 @@
 CLASS.Base = "fast_zombie"
 CLASS.Revives = false
 
-CLASS.Name = "Lacerator"
-CLASS.TranslationName = "class_lacerator"
-CLASS.Description = "description_lacerator"
-CLASS.Help = "controls_lacerator"
+CLASS.Name = "Rape"
+CLASS.TranslationName = "class_rape"
+CLASS.Description = "description_rape"
+CLASS.Help = "controls_rape"
 
-CLASS.Model = Model("models/player/zombie_lacerator2.mdl")
+CLASS.Model = Model("models/half-dead/specimen.mdl")
 
-CLASS.BetterVersion = "Rape"
+CLASS.Wave = 5 / 5
 
-CLASS.Wave = 3 / 5
-
-CLASS.Health = 160 --225
-CLASS.Speed = 250 --270
-CLASS.SWEP = "weapon_zs_lacerator"
+CLASS.Health = 240
+CLASS.Speed = 250
+CLASS.SWEP = "weapon_zs_rape"
 
 CLASS.Hull = {Vector(-16, -16, 0), Vector(16, 16, 58)}
 CLASS.HullDuck = {Vector(-16, -16, 0), Vector(16, 16, 32)}

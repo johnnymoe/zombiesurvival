@@ -1,0 +1,8 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "models\Half-Dead\Feeder/c_zom_bruiser_alphas_c"
+        "$bumpmap" "models\Half-Dead\Feeder/c_zom_bruiser_alphas_n"
+	"$selfillum" 1
+	"$additive" 1
+}
+
