@@ -740,7 +740,7 @@ cvars.AddChangeCallback("zs_zombiedamagemultiplier", function(cvar, oldvalue, ne
 	GAMEMODE.ZombieDamageMultiplier = math.ceil(100 * (tonumber(newvalue) or 1)) * 0.01
 end)
 
-GM.TimeLimit = CreateConVar("zs_timelimit", "15", FCVAR_ARCHIVE + FCVAR_NOTIFY, "Time in minutes before the game will change maps. It will not change maps if a round is currently in progress but after the current round ends. -1 means never switch maps. 0 means always switch maps."):GetInt() * 60
+GM.TimeLimit = CreateConVar("zs_timelimit", "8", FCVAR_ARCHIVE + FCVAR_NOTIFY, "Time in minutes before the game will change maps. It will not change maps if a round is currently in progress but after the current round ends. -1 means never switch maps. 0 means always switch maps."):GetInt() * 60
 cvars.AddChangeCallback("zs_timelimit", function(cvar, oldvalue, newvalue)
 	GAMEMODE.TimeLimit = tonumber(newvalue) or 15
 	if GAMEMODE.TimeLimit ~= -1 then
