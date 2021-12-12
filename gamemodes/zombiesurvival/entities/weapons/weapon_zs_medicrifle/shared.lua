@@ -22,7 +22,7 @@ SWEP.Primary.DefaultClip = 120
 SWEP.Primary.Ammo = "Battery"
 
 SWEP.RequiredClip = 8
-SWEP.Primary.Damage = 75
+SWEP.Primary.Damage = 30
 SWEP.ReloadSpeed = 1
 
 SWEP.WalkSpeed = SPEED_SLOW
