@@ -117,7 +117,7 @@ SWEP.Primary.Sound = Sound("weapons/p228/p228-1.wav")
 SWEP.Primary.Damage = 100
 SWEP.HeadshotMulti = 4
 SWEP.Primary.NumShots = 1
-SWEP.Primary.Delay = 1.6
+SWEP.Primary.Delay = 1.2
 SWEP.ReloadDelay = SWEP.Primary.Delay
 
 SWEP.Primary.ClipSize = 3
@@ -128,7 +128,7 @@ SWEP.Primary.DefaultClip = 3
 SWEP.Primary.Gesture = ACT_HL2MP_GESTURE_RANGE_ATTACK_CROSSBOW
 SWEP.ReloadGesture = ACT_HL2MP_GESTURE_RELOAD_SHOTGUN
 
-SWEP.ConeMax = 4
+SWEP.ConeMax = 2
 SWEP.ConeMin = 0
 
 SWEP.IronSightsPos = Vector(-6.63, -16.605, 3.282)
@@ -138,7 +138,7 @@ SWEP.IronSightsAng = Vector(-0.504, 0.039, 0)
 SWEP.WalkSpeed = SPEED_SLOW
 
 
-SWEP.Tier = 5
+SWEP.Tier = 4
 SWEP.MaxStock = 1
 
 
@@ -150,7 +150,7 @@ end
 function SWEP.BulletCallback(attacker, tr, dmginfo)
 	local ent = tr.Entity
 	if ent:IsValidZombie() then
-		ent:AddLegDamageExt(30, attacker, attacker:GetActiveWeapon(), SLOWTYPE_PULSE)
+		ent:AddLegDamageExt(20, attacker, attacker:GetActiveWeapon(), SLOWTYPE_PULSE)
 	end
 
 	if IsFirstTimePredicted() then

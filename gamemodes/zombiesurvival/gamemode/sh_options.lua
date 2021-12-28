@@ -118,17 +118,17 @@ GM.AmmoCache["airboatgun"]					= 1			-- Arsenal crates.
 GM.AmmoCache["CombineHeavyCannon"]			= 1			-- Craft Stations.
 GM.AmmoCache["striderminigun"]				= 1			-- Message beacons.
 GM.AmmoCache["helicoptergun"]				= 1			-- Resupply boxes.
-GM.AmmoCache["spotlamp"]					= 1
-GM.AmmoCache["manhack"]						= 1
-GM.AmmoCache["repairfield"]					= 1
-GM.AmmoCache["zapper"]						= 1
-GM.AmmoCache["pulse"]						= 32
-GM.AmmoCache["impactmine"]					= 4
-GM.AmmoCache["chemical"]					= 24
-GM.AmmoCache["flashbomb"]					= 1
-GM.AmmoCache["turret_buckshot"]				= 1
-GM.AmmoCache["turret_assault"]				= 1
-GM.AmmoCache["scrap"]						= 2
+GM.AmmoCache["spotlamp"]					= 1         -- Spotlamps.
+GM.AmmoCache["manhack"]						= 1         -- Manhacks.
+GM.AmmoCache["repairfield"]					= 1         -- Repair fields.
+GM.AmmoCache["zapper"]						= 1         -- Zappers.
+GM.AmmoCache["pulse"]						= 32        -- Pulse weapons.
+GM.AmmoCache["impactmine"]					= 4         -- Mines/Explosives. Todo: Differenciate rockets and grenade explosive weapons, as I (DuffT) want to make them different
+GM.AmmoCache["chemical"]					= 24        -- Chemical weapons
+GM.AmmoCache["flashbomb"]					= 1         -- Flashbangs?
+GM.AmmoCache["turret_buckshot"]				= 1         -- Turrets
+GM.AmmoCache["turret_assault"]				= 1         -- AR Turrets
+GM.AmmoCache["scrap"]						= 2         -- Scrap ammo, not really used except for FLAK cannon from what i saw
 
 GM.AmmoResupply = table.ToAssoc({"ar2", "pistol", "smg1", "357", "xbowbolt", "buckshot", "battery", "pulse", "impactmine", "chemical", "gaussenergy", "scrap"})
 
@@ -359,13 +359,13 @@ GM:AddPointShopItem("stalker",			ITEMCAT_GUNS,			125,			"weapon_zs_m4")
 GM:AddPointShopItem("quasar",			ITEMCAT_GUNS,			125,			"weapon_zs_quasar")
 GM:AddPointShopItem("gluon",			ITEMCAT_GUNS,			125,			"weapon_zs_gluon")
 GM:AddPointShopItem("barrage",			ITEMCAT_GUNS,			125,			"weapon_zs_barrage")
-GM:AddPointShopItem("fallschirmgewehr", ITEMCAT_GUNS,           150,            "weapon_zs_fallschirmgewehr")
+GM:AddPointShopItem("fallschirmgewehr", ITEMCAT_GUNS,           125,            "weapon_zs_fallschirmgewehr")
 GM:AddPointShopItem("fool",             ITEMCAT_GUNS,           125,            "weapon_zs_fool")
+GM:AddPointShopItem("eelis",            ITEMCAT_GUNS,           125,            "weapon_zs_eelin_sako")
 -- Tier 5
 GM:AddPointShopItem("novacolt",			ITEMCAT_GUNS,			200,			"weapon_zs_novacolt")
 GM:AddPointShopItem("bulwark",			ITEMCAT_GUNS,			200,			"weapon_zs_bulwark")
 GM:AddPointShopItem("juggernaut",		ITEMCAT_GUNS,			200,			"weapon_zs_juggernaut")
-GM:AddPointShopItem("eelis",            ITEMCAT_GUNS,           200,            "weapon_zs_eelin_sako")
 GM:AddPointShopItem("scar",				ITEMCAT_GUNS,			200,			"weapon_zs_scar")
 GM:AddPointShopItem("boomstick",		ITEMCAT_GUNS,			200,			"weapon_zs_boomstick")
 GM:AddPointShopItem("deathdlrs",		ITEMCAT_GUNS,			200,			"weapon_zs_deathdealers")
