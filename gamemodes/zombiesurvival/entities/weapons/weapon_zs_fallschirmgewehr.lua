@@ -17,7 +17,7 @@ if CLIENT then
 	["woodenblockriffel"] = { type = "Model", model = "models/props_phx/gears/rack36.mdl", bone = "Base", rel = "body1", pos = Vector(4.256, -7.139, 1.134), angle = Angle(-90, 0, 0), size = Vector(0.372, 0.082, 0.025), color = Color(107, 67, 0, 255), surpresslightning = false, material = "phoenix_storms/white_brushes", skin = 0, bodygroup = {} },
 	["holeblocker"] = { type = "Model", model = "models/hunter/tubes/circle2x2c.mdl", bone = "Base", rel = "body1+", pos = Vector(2.224, 0.157, 0.014), angle = Angle(0, 180, 0), size = Vector(0.041, 0.041, 0.041), color = Color(107, 78, 0, 255), surpresslightning = false, material = "phoenix_storms/white_brushes", skin = 0, bodygroup = {} },
 	["body1+"] = { type = "Model", model = "models/hunter/tubes/tube1x1x1c.mdl", bone = "Base", rel = "bareeeeeeeeeeeeeeeeeeel", pos = Vector(0.057, -0.343, -13.858), angle = Angle(0, -90, 0), size = Vector(0.092, 0.089, 0.293), color = Color(109, 67, 0, 255), surpresslightning = false, material = "phoenix_storms/white_brushes", skin = 0, bodygroup = {} },
-	["backironsight2"] = { type = "Model", model = "models/props_c17/SuitCase001a.mdl", bone = "Base", rel = "backironsight", pos = Vector(0, 0, 0.199), angle = Angle(0, 0, 180), size = Vector(0.028, 0.052, 0.25), color = Color(255, 255, 255, 255), surpresslightning = true, material = "phoenix_storms/pack2/black", skin = 0, bodygroup = {} },
+	["backironsight2"] = { type = "Model", model = "models/props_c17/SuitCase001a.mdl", bone = "Base", rel = "backironsight", pos = Vector(0, 0, 0.199), angle = Angle(0, 0, 180), size = Vector(0.028, 0.052, 0.25), color = Color(255, 255, 255, 255), surpresslightning = false, material = "phoenix_storms/pack2/black", skin = 0, bodygroup = {} },
 	["body5maghole1+++"] = { type = "Model", model = "models/Items/item_item_crate_chunk02.mdl", bone = "Base", rel = "body5maghole1", pos = Vector(0, 0, -5.38), angle = Angle(0, 0, 0), size = Vector(0.414, 0.212, 1.08), color = Color(255, 255, 255, 255), surpresslightning = false, material = "phoenix_storms/black_brushes", skin = 0, bodygroup = {} },
 	["bipod"] = { type = "Model", model = "models/props_wasteland/barricade001a.mdl", bone = "Base", rel = "mEtAlPoLEEEeee", pos = Vector(0, 5.143, 23.343), angle = Angle(-90, 90, 0), size = Vector(0.054, 0.256, 0.257), color = Color(255, 255, 255, 255), surpresslightning = false, material = "phoenix_storms/black_chrome", skin = 0, bodygroup = {} },
 	["bareeeeeeeeeeeeeeeeeeelmuzzle"] = { type = "Model", model = "models/props_lab/jar01b.mdl", bone = "Base", rel = "bareeeeeeeeeeeeeeeeeeel", pos = Vector(0, 0.087, 25.365), angle = Angle(180, 0, 0), size = Vector(0.407, 0.407, 0.407), color = Color(0, 0, 0, 255), surpresslightning = true, material = "phoenix_storms/smallwheel_side", skin = 0, bodygroup = {} },
@@ -76,16 +76,16 @@ SWEP.WorldModel = "models/weapons/w_irifle.mdl"
 SWEP.UseHands = true
 
 SWEP.ShowViewModel = false
-SWEP.ShowWorldModel = false
+SWEP.ShowWorldModel = true
 SWEP.ReloadSound = Sound("Weapon_SMG1.Reload")
-SWEP.Primary.Sound = Sound("weapons/ar2/fire1.wav")
-SWEP.Primary.Damage = 65
+SWEP.Primary.Sound = Sound("weapons/m249/m249-1.wav")
+SWEP.Primary.Damage = 17
 SWEP.Primary.NumShots = 1
-SWEP.Primary.Delay = 0.23
+SWEP.Primary.Delay = 0.075
 
-SWEP.Primary.ClipSize = 20
+SWEP.Primary.ClipSize = 40
 SWEP.Primary.Automatic = true
-SWEP.Primary.Ammo = "357"
+SWEP.Primary.Ammo = "ar2"
 GAMEMODE:SetupDefaultClip(SWEP.Primary)
 
 SWEP.ConeMax = 9
@@ -104,10 +104,14 @@ SWEP.TracerName = "AR2Tracer"
 
 SWEP.FireAnimSpeed = 0.4
 
+SWEP.ReloadSpeed = 0.13
+
 SWEP.IronsightsMultiplier = 0.5
 
+
 function SWEP:EmitFireSound()
-    self:EmitSound(self.Primary.Sound, 100, math.random(70,80))
+    self:EmitSound(self.Primary.Sound, 60, math.random(150,160))
+	self:EmitSound("weapons/ak47/ak47-1.wav", 60, 76, 0.53, CHAN_AUTO+20)
      
 end
 
@@ -118,9 +122,10 @@ end
 local ghostlerp = 0
 function SWEP:CalcViewModelView(vm, oldpos, oldang, pos, ang)
 if self:GetOwner():GetBarricadeGhosting() or self:GetReloadFinish() > 0 then
-ghostlerp = math.min(1, ghostlerp + FrameTime() * 0.3)
+ghostlerp = math.min(1, ghostlerp + FrameTime() * 0.44)
 elseif ghostlerp > 0 then
-ghostlerp = math.max(0, ghostlerp - FrameTime() * 0.7)
+ghostlerp = math.max(0, ghostlerp - FrameTime() * 2)
+
 end
 
 if ghostlerp > 0 then
@@ -129,8 +134,6 @@ end
 
 return pos, ang
 end
-
-SWEP.ReloadSpeed = 0.3
 
 
 //Made by DuffT. Thanks to Superspooner,Johnny Moe, and erdf 
