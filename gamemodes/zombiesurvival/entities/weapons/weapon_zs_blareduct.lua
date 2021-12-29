@@ -39,17 +39,17 @@ SWEP.ShowViewModel = false
 SWEP.ShowWorldModel = false
 
 SWEP.Primary.Sound = Sound("weapons/shotgun/shotgun_dbl_fire.wav")
-SWEP.Primary.Damage = 7.7625
-SWEP.Primary.NumShots = 8
-SWEP.Primary.Delay = 0.75
+SWEP.Primary.Damage = 3.3
+SWEP.Primary.NumShots = 50
+SWEP.Primary.Delay = 2
 
 SWEP.Primary.ClipSize = 1
 SWEP.Primary.Automatic = true
-SWEP.Primary.Ammo = "buckshot"
+SWEP.Primary.Ammo = "scrap"
 SWEP.ReloadSound = Sound("weapons/aug/aug_boltslap.wav")
 GAMEMODE:SetupDefaultClip(SWEP.Primary)
 
-SWEP.ReloadSpeed = 0.45
+SWEP.ReloadSpeed = 0.2
 SWEP.ReloadDelay = 0.45
 
 SWEP.Recoil = 70
@@ -61,7 +61,7 @@ SWEP.ConeMin = 7
 
 SWEP.WalkSpeed = SPEED_NORMAL
 
-GAMEMODE:AttachWeaponModifier(SWEP, WEAPON_MODIFIER_RELOAD_SPEED, 0.19, 1)
+GAMEMODE:AttachWeaponModifier(SWEP, WEAPON_MODIFIER_RELOAD_SPEED, 0.05, 1)
 GAMEMODE:AttachWeaponModifier(SWEP, WEAPON_MODIFIER_RECOIL, -32.5)
 GAMEMODE:AttachWeaponModifier(SWEP, WEAPON_MODIFIER_MIN_SPREAD, -1)
 
