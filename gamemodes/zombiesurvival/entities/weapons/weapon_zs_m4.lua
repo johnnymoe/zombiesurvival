@@ -27,7 +27,7 @@ SWEP.UseHands = true
 SWEP.Primary.Sound = Sound("Weapon_m4a1.Single")
 SWEP.Primary.Damage = 24.5
 SWEP.Primary.NumShots = 1
-SWEP.Primary.Delay = 0.11
+SWEP.Primary.Delay = 0.105
 
 SWEP.Primary.ClipSize = 30
 SWEP.Primary.Automatic = true
@@ -49,9 +49,9 @@ SWEP.IronSightsPos = Vector(-3, 0, 2)
 
 GAMEMODE:AttachWeaponModifier(SWEP, WEAPON_MODIFIER_MAX_SPREAD, -0.625)
 GAMEMODE:AttachWeaponModifier(SWEP, WEAPON_MODIFIER_MIN_SPREAD, -0.187)
-local branch = GAMEMODE:AddNewRemantleBranch(SWEP, 1, "'Aspirant' Burst M4", "Increased damage, shoots in a slower, more accurate 3 round burst", function(wept)
+local branch = GAMEMODE:AddNewRemantleBranch(SWEP, 1, "'Aspirant' Burst M4", "Increased damage, shoots slower, but very fast and more accurate 3 round burst", function(wept)
 	wept.Primary.Damage = wept.Primary.Damage * 1.1
-	wept.Primary.Delay = wept.Primary.Delay * 5.7
+	wept.Primary.Delay = wept.Primary.Delay * 4.5
 	wept.Primary.BurstShots = 3
 	wept.ConeMin = wept.ConeMin * 0.6
 	wept.ConeMax = wept.ConeMax * 0.5
@@ -74,7 +74,7 @@ local branch = GAMEMODE:AddNewRemantleBranch(SWEP, 1, "'Aspirant' Burst M4", "In
 		local shotsleft = self:GetShotsLeft()
 		if shotsleft > 0 and CurTime() >= self:GetNextShot() then
 			self:SetShotsLeft(shotsleft - 1)
-			self:SetNextShot(CurTime() + self:GetFireDelay()/6)
+			self:SetNextShot(CurTime() + self:GetFireDelay()/20)
 
 			if self:Clip1() > 0 and self:GetReloadFinish() == 0 then
 				self:EmitFireSound()
