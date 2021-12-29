@@ -1,4 +1,5 @@
 AddCSLuaFile()
+DEFINE_BASECLASS("weapon_zs_base")
 
 SWEP.PrintName = "'Crackler' Assault Rifle"
 SWEP.Description = "An unsophisticated assault rifle which has good damage and accuracy."
@@ -53,3 +54,62 @@ GAMEMODE:AddNewRemantleBranch(SWEP, 1, "'Crackler' Combat Rifle", "Loses automat
 	wept.ConeMax = wept.ConeMax * 0.7
 	wept.Primary.Automatic = false
 end)
+
+local branch = GAMEMODE:AddNewRemantleBranch(SWEP, 2,"'Cruckler' Burst Rifle", "Increases accuracy but also turns into burst fire",function (wept)
+
+wept.Primary.Delay = wept.Primary.Delay * 4
+wept.Primary.BurstShots = 3
+wept.ConeMin = wept.ConeMin * 0.6
+wept.ConeMax = wept.ConeMax * 0.6
+
+wept.PrimaryAttack = function(self)
+		if not self:CanPrimaryAttack() then return end
+
+		self:SetNextPrimaryFire(CurTime() + self:GetFireDelay())
+		self:EmitFireSound()
+
+		self:SetNextShot(CurTime())
+		self:SetShotsLeft(self.Primary.BurstShots)
+
+		self.IdleAnimation = CurTime() + self:SequenceDuration()
+	end
+
+	wept.Think = function(self)
+		BaseClass.Think(self)
+
+		local shotsleft = self:GetShotsLeft()
+		if shotsleft > 0 and CurTime() >= self:GetNextShot() then
+			self:SetShotsLeft(shotsleft - 1)
+			self:SetNextShot(CurTime() + self:GetFireDelay()/9)
+
+			if self:Clip1() > 0 and self:GetReloadFinish() == 0 then
+				self:EmitFireSound()
+				self:TakeAmmo()
+				self:ShootBullets(self.Primary.Damage, self.Primary.NumShots, self:GetCone())
+
+				self.IdleAnimation = CurTime() + self:SequenceDuration()
+			else
+				self:SetShotsLeft(0)
+			end
+		end
+	end
+end)
+branch.NewNames = {"Reverse-Engineered", "Re-Invented", "Re-Assembled"}
+
+function SWEP:SetNextShot(nextshot)
+	self:SetDTFloat(5, nextshot)
+end
+
+function SWEP:GetNextShot()
+	return self:GetDTFloat(5)
+end
+
+function SWEP:SetShotsLeft(shotsleft)
+	self:SetDTInt(1, shotsleft)
+end
+
+function SWEP:GetShotsLeft()
+	return self:GetDTInt(1)
+end
+  
+  
