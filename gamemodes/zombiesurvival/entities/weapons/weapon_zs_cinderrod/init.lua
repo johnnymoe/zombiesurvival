@@ -4,8 +4,8 @@ function SWEP.BulletCallback(attacker, tr, dmginfo)
 	if attacker:IsValid() and attacker:IsPlayer() and attacker:Team() == TEAM_HUMAN then
 		local pos = tr.HitPos
 		for ent, dmg in pairs(util.BlastDamageExAlloc(attacker:GetActiveWeapon(), attacker, pos, 82, dmginfo:GetDamage() * 0.75, DMG_ALWAYSGIB)) do
-			if math.random(4) == 1 and ent:IsValidLivingPlayer() and (ent:Team() == TEAM_UNDEAD or ent == attacker) then
-				ent:Ignite(dmg / 14)
+			if math.random(1,8) == 1 and ent:IsValidLivingPlayer() and (ent:Team() == TEAM_UNDEAD or ent == attacker) then
+				ent:Ignite(5)
 				for __, fire in pairs(ents.FindByClass("entityflame")) do
 					if fire:IsValid() and fire:GetParent() == ent then
 						fire:SetOwner(attacker)
@@ -36,7 +36,7 @@ function SWEP:PrimaryAttack()
 	if owner:IsValid() then
 		local pos = owner:GetPos()
 
-		util.BlastDamagePlayer(self, owner, pos, 50, 55, DMG_ALWAYSGIB)
+		util.BlastDamagePlayer(self, owner, pos, 200, 200, DMG_ALWAYSGIB)
 
 		local effectdata = EffectData()
 			effectdata:SetOrigin(pos)
