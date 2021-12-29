@@ -14,7 +14,6 @@ function ENT:Initialize()
 	self:SetModel("models/mosi/fnv/props/workstations/workbench.mdl")
 	self:PhysicsInit(SOLID_VPHYSICS)
 	self:SetUseType(SIMPLE_USE)
-	self:SetCollisionGroup(COLLISION_GROUP_WORLD)
 
 	self:CollisionRulesChanged()
 
