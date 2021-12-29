@@ -14,7 +14,6 @@ function ENT:Initialize()
 	self:SetModel("models/props_c17/furniturestove001a.mdl")
 	self:PhysicsInit(SOLID_VPHYSICS)
 	self:SetUseType(SIMPLE_USE)
-	self:SetCollisionGroup(COLLISION_GROUP_WORLD)
 
 	self:CollisionRulesChanged()
 

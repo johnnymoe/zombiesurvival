@@ -1,5 +1,6 @@
 INC_SERVER()
 
+
 local function RefreshCrateOwners(pl)
 	for _, ent in pairs(ents.FindByClass("prop_resupplybox")) do
 		if ent:IsValid() and ent:GetObjectOwner() == pl then
@@ -15,7 +16,6 @@ function ENT:Initialize()
 	self:PhysicsInit(SOLID_VPHYSICS)
 	self:SetUseType(SIMPLE_USE)
 	self:SetPlaybackRate(1)
-	self:SetCollisionGroup(COLLISION_GROUP_WORLD) -- I decided to make them not collide.
 
 	self:CollisionRulesChanged()
 
