@@ -378,6 +378,7 @@ GM:AddPointShopItem("broadside",		ITEMCAT_GUNS,			200,			"weapon_zs_broadside")
 GM:AddPointShopItem("smelter",			ITEMCAT_GUNS,			200,			"weapon_zs_smelter")
 GM:AddPointShopItem("fortunateone",     ITEMCAT_GUNS,           200,            "weapon_zs_un_fortunateson")
 GM:AddPointShopItem("gibinator",        ITEMCAT_GUNS,          200, "weapon_zs_gibinator")
+GM:AddPointShopItem("raketenpanzerbuchse",   ITEMCAT_GUNS,     200,             "weapon_zs_raketenpanzerbuchse")
 
 GM:AddPointShopItem("pistolammo",			ITEMCAT_AMMO,			5,				nil,							"16 pistol ammo",				nil,									"ammo_pistol",						function(pl) pl:GiveAmmo(16, "pistol", true) end)
 GM:AddPointShopItem("pistolammo2",			ITEMCAT_AMMO,			10,				nil,							"32 pistol ammo",				nil,									"ammo_pistol",						function(pl) pl:GiveAmmo(32, "pistol", true) end)
