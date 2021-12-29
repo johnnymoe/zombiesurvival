@@ -1,4 +1,5 @@
 AddCSLuaFile()
+DEFINE_BASECLASS("weapon_zs_base")
 
 SWEP.PrintName = "'Ender' Automatic Shotgun"
 SWEP.Description = "Relatively accurate, clip loaded, automatic shotgun."
@@ -51,3 +52,17 @@ end)
 
 function SWEP:SecondaryAttack()
 end
+
+
+local branch = GAMEMODE:AddNewRemantleBranch(SWEP,2, "'Galidl' Automatic AR", "Fires assault rifle rounds instead of shotgun rounds", function(wept)
+
+wept.Primary.Damage = wept.Primary.Damage * 2.3
+wept.Primary.NumShots = 1
+wept.ConeMin = wept.ConeMin * 0.5
+wept.ConeMax = wept.ConeMax * 0.8
+wept.Primary.Delay = wept.Primary.Delay * 0.27
+wept.Primary.Ammo = "ar2"
+wept.Primary.ClipSize = wept.Primary.ClipSize * 4.1
+end)
+
+branch.NewNames = {"Reverse-Engineered", "Re-Invented", "Re-Assembled"}
