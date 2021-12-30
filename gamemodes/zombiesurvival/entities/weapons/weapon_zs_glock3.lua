@@ -1,4 +1,5 @@
 AddCSLuaFile()
+DEFINE_BASECLASS("weapon_zs_base")
 
 SWEP.PrintName = "'Crossfire' Glock 3"
 SWEP.Description = "Fires 3 shots at once. Not very accurate, but very damaging up close."
@@ -43,22 +44,17 @@ SWEP.IronSightsPos = Vector(-5.75, 10, 2.7)
 GAMEMODE:AttachWeaponModifier(SWEP, WEAPON_MODIFIER_MAX_SPREAD, -0.9, 1)
 GAMEMODE:AttachWeaponModifier(SWEP, WEAPON_MODIFIER_MIN_SPREAD, -0.5, 1)
 GAMEMODE:AttachWeaponModifier(SWEP, WEAPON_MODIFIER_CLIP_SIZE, 1, 1)
-GAMEMODE:AddNewRemantleBranch(SWEP, 1, "'Collider' Glock 3", "Fires 1 less but more accurate shots, higher base damage, and a chance to gain reaper stacks", function(wept)
-	wept.Primary.NumShots = 2
-	wept.Primary.Damage = wept.Primary.Damage * 1.2
+GAMEMODE:AddNewRemantleBranch(SWEP, 1, "'Lauf' Glock 3", "Fires the Glock in automatic mode, but loses damage and only fires 1 bullet", function(wept)
+	wept.Primary.NumShots = 1
+	wept.Primary.Damage = wept.Primary.Damage * 0.9
 	wept.ConeMin = wept.ConeMin * 0.65
 	wept.ConeMax = wept.ConeMax * 0.65
+	wept.Primary.ClipSize = wept.Primary.ClipSize * 3
+	wept.Primary.Delay = wept.Primary.Delay * 0.5
+	wept.Primary.Automatic = true
 
-	wept.BulletCallback = function(attacker, tr, dmginfo)
-		if SERVER and tr.Entity:IsValidLivingZombie() and math.random(20) == 1 then
-			local status = attacker:GiveStatus("reaper", 14)
-			if status and status:IsValid() then
-				status:SetDTInt(1, math.min(status:GetDTInt(1) + 1, 3))
-				attacker:EmitSound("hl1/ambience/particle_suck1.wav", 55, 150 + status:GetDTInt(1) * 30, 0.45)
-			end
-		end
-	end
 end)
+
 local branch = GAMEMODE:AddNewRemantleBranch(SWEP, 2, "'Shroud' SOCOM Mark 23", "Fires 1 shot, hides your aura, deals less total damage but is more accurate", function(wept)
 	wept.Primary.NumShots = 1
 	wept.Primary.Damage = wept.Primary.Damage * 2.3
